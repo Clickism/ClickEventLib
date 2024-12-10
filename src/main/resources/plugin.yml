@@ -1,0 +1,21 @@
+name: ClickEventLib
+version: '1.0'
+main: me.clickism.clickeventlib.ClickEventLib
+api-version: '1.20'
+authors: [ Clickism ]
+description: Event Library.
+commands:
+  event:
+    description: Event command.
+  chat:
+    description: Chat command.
+  join:
+    description: Join command.
+  leave:
+    description: Leave command.
+  invite:
+    description: Invite command.
+permissions:
+  clickeventlib.chat:
+    description: Permission to use the chat.
+    default: true
