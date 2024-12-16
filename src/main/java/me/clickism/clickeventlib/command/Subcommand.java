@@ -1,6 +1,7 @@
 package me.clickism.clickeventlib.command;
 
 import me.clickism.clickeventlib.command.argument.Argument;
+import me.clickism.clickeventlib.util.Named;
 import org.bukkit.command.CommandSender;
 
 import java.util.ArrayList;
@@ -10,7 +11,7 @@ import java.util.stream.Collectors;
 /**
  * Represents a subcommand.
  */
-public abstract class Subcommand {
+public abstract class Subcommand implements Named {
     /**
      * The label of the subcommand.
      */
@@ -60,6 +61,11 @@ public abstract class Subcommand {
      */
     public String getLabel() {
         return label;
+    }
+
+    @Override
+    public String getName() {
+        return getLabel();
     }
 
     /**

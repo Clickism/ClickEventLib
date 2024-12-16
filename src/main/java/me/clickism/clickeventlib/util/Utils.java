@@ -96,7 +96,7 @@ public class Utils {
      */
     public static boolean isFatal(EntityDamageEvent event) {
         if (!(event.getEntity() instanceof LivingEntity livingEntity)) return false;
-        return livingEntity.getHealth() - event.getFinalDamage() <= 0;
+        return event.getFinalDamage() > livingEntity.getHealth();
     }
 
     /**
@@ -113,9 +113,20 @@ public class Utils {
 
     /**
      * Resets a player's health, food, and inventory, etc. and sets their game mode to survival.
+     *
      * @param player the player to reset
      */
     public static void resetPlayer(Player player) {
+        resetPlayer(player, GameMode.SURVIVAL);
+    }
+
+    /**
+     * Resets a player's health, food, and inventory, etc. and sets their game mode to the given game mode.
+     *
+     * @param player   the player to reset
+     * @param gameMode the game mode to set the player to
+     */
+    public static void resetPlayer(Player player, GameMode gameMode) {
         Utils.clearInventory(player);
         player.setHealth(20);
         player.setFoodLevel(20);
@@ -127,7 +138,8 @@ public class Utils {
         player.setGlowing(false);
         player.setInvulnerable(false);
         player.setInvisible(false);
-        player.setGameMode(GameMode.SURVIVAL);
+        player.setGameMode(gameMode);
+        player.getActivePotionEffects().forEach(effect -> player.removePotionEffect(effect.getType()));
     }
 
     /**
@@ -214,7 +226,7 @@ public class Utils {
     public static void teleportSmoothly(Player player, Location location, Plugin plugin) {
         teleportSmoothly(player, location, plugin, () -> {});
     }
-    
+
     /**
      * Teleports a player smoothly to a location and runs a task after teleporting.
      *

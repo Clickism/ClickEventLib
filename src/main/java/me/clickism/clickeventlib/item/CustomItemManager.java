@@ -93,6 +93,10 @@ public class CustomItemManager implements Listener {
         }
         customItem.onInteract(event);
         customItem.registerInteraction(player);
+        if (customItem.isUseOnInteract()) {
+            event.setCancelled(true);
+            Utils.removeItem(player, item, 1);
+        }
     }
 
     @EventHandler(ignoreCancelled = true)
@@ -101,6 +105,11 @@ public class CustomItemManager implements Listener {
         CustomItem customItem = getCustomItemOf(item);
         if (customItem == null) return;
         customItem.onConsume(event);
+        if (customItem.isUseOnConsume()) {
+            event.setCancelled(true);
+            Player player = event.getPlayer();
+            Utils.removeItem(player, item, 1);
+        }
     }
 
     @EventHandler(ignoreCancelled = true)

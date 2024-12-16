@@ -3,13 +3,13 @@ package me.clickism.clickeventlib.command;
 import me.clickism.clickeventlib.annotations.AutoRegistered;
 import me.clickism.clickeventlib.annotations.RegistryType;
 import me.clickism.clickeventlib.chat.MessageType;
+import me.clickism.clickeventlib.util.NamedCollection;
 import me.clickism.clickeventlib.util.Parameterizer;
 import org.bukkit.Bukkit;
 import org.bukkit.command.*;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 
 /**
@@ -19,16 +19,17 @@ public class CommandManager implements CommandExecutor {
     private static final String USAGE_KEY = "usage";
 
     private final TabCompleter tabCompleter = new CommandTabCompleter(this);
-    private final List<Subcommand> commands = new ArrayList<>();
+    private final NamedCollection<Subcommand> commands = new NamedCollection<>(new ArrayList<>());
 
     /**
      * Creates a new command manager.
      */
     public CommandManager() {
     }
-
+    
     /**
      * Registers a root command.
+     * <p>If the root command is not registered in plugin.yml, will do nothing.</p>
      *
      * @param subcommand subcommand to register as a root command
      */
@@ -37,41 +38,43 @@ public class CommandManager implements CommandExecutor {
         commands.add(subcommand);
         PluginCommand pluginCommand = Bukkit.getPluginCommand(subcommand.getLabel());
         if (pluginCommand == null) {
-            throw new IllegalArgumentException("This (root) subcommand's label is not registered: '" +
-                    subcommand.getLabel() + "' .Check plugin.yml.");
+            Bukkit.getLogger().log(Level.SEVERE, "This (root) subcommand's label is not registered: '" +
+                    subcommand.getLabel() + "'. Check plugin.yml.");
+            return;
         }
         pluginCommand.setExecutor(this);
         pluginCommand.setTabCompleter(tabCompleter);
     }
 
     /**
-     * Get the list of root subcommands.
+     * Get the named collection of root subcommands.
      *
-     * @return list of root subcommands
+     * @return named collection of root subcommands
      */
-    public List<Subcommand> getCommands() {
+    public NamedCollection<Subcommand> getCommands() {
         return commands;
     }
 
     @Override
-    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command,
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, 
                              @NotNull String label, String[] args) {
-        for (Subcommand subcommand : commands) {
-            if (!subcommand.getLabel().equalsIgnoreCase(label)) continue;
-            CommandStack trace = new CommandStack();
-            try {
-                ArgumentHandler argHandler = new ArgumentHandler(sender, subcommand, args);
-                trace.push(subcommand);
-                CommandResult result = subcommand.executeIfAllowed(trace, sender, argHandler);
-                handleCommandResult(trace, sender, result);
-            } catch (CommandException exception) {
-                handleCommandResult(trace, sender, CommandResult.failure(exception.getMessage()));
-            } catch (Exception exception) {
-                MessageType.FAIL.send(sender, "An error occurred while executing this command: &l"
-                        + exception.getMessage());
-                Bukkit.getLogger().log(Level.SEVERE, exception.getMessage(), exception);
-            }
-            return true;
+        Subcommand subcommand = commands.get(label);
+        if (subcommand == null) return false;
+        CommandStack trace = new CommandStack();
+        try {
+            ArgumentHandler argHandler = new ArgumentHandler(sender, subcommand, args);
+            trace.push(subcommand);
+            CommandResult result = subcommand.executeIfAllowed(trace, sender, argHandler);
+            handleCommandResult(trace, sender, result);
+        } catch (CommandException exception) {
+            handleCommandResult(trace, sender, CommandResult.failure(exception.getMessage()));
+        } catch (Exception exception) {
+            MessageType.FAIL.send(sender, "An error occurred while executing this command: &l"
+                                          + exception.getMessage());
+            String commandString = command.getLabel() + " " + String.join(" ", args);
+            Bukkit.getLogger().log(Level.SEVERE, 
+                    "An error occurred when " + sender.getName() + " tried executing command '/" + commandString +
+                    "': " + exception.getMessage(), exception);
         }
         return true;
     }

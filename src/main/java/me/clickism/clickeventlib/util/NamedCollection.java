@@ -68,6 +68,19 @@ public class NamedCollection<T extends Named> extends AbstractCollection<T> {
     }
 
     /**
+     * Adds the object if it is not already present in the collection.
+     *
+     * @param t object to add
+     * @return true if the object was added, false if the object was already present
+     */
+    public boolean addIfAbsent(T t) {
+        if (nameMap.containsKey(t.getName())) {
+            return false;
+        }
+        return add(t);
+    }
+
+    /**
      * Iterator for NamedCollection that overrides Collection#remove.
      *
      * @param <T>

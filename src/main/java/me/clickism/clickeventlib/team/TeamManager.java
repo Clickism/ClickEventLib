@@ -45,8 +45,40 @@ public class TeamManager implements Listener {
      * @param eventTeam the team to register
      */
     public void registerTeam(EventTeam eventTeam) {
-        teams.add(eventTeam);
+        teams.addIfAbsent(eventTeam);
         tryRegisterTeamOnScoreboard(eventTeam);
+    }
+
+    /**
+     * Registers multiple teams.
+     *
+     * @param eventTeams the teams to register
+     */
+    public void registerTeams(EventTeam... eventTeams) {
+        for (EventTeam eventTeam : eventTeams) {
+            registerTeam(eventTeam);
+        }
+    }
+
+    /**
+     * Registers a team if it is not already registered.
+     *
+     * @param eventTeam the team to register
+     */
+    public void registerTeamIfAbsent(EventTeam eventTeam) {
+        if (!teams.contains(eventTeam)) {
+            registerTeam(eventTeam);
+        }
+    }
+
+    /**
+     * Checks if a team is registered.
+     *
+     * @param eventTeam the team to check
+     * @return true if the team is registered, false otherwise
+     */
+    public boolean isRegistered(EventTeam eventTeam) {
+        return teams.contains(eventTeam);
     }
 
     /**

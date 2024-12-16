@@ -46,6 +46,9 @@ public class CustomItem implements Named {
     private final Map<Player, Long> lastInteractionMap = new HashMap<>();
 
     private boolean immovable = false;
+    private boolean useOnInteract = false;
+    private boolean useOnConsume = false;
+
     private long interactCooldown = 0;
 
     /**
@@ -101,6 +104,28 @@ public class CustomItem implements Named {
      */
     public CustomItem setOnPickup(Consumer<EntityPickupItemEvent> onPickup) {
         this.onPickup = onPickup;
+        return this;
+    }
+
+    /**
+     * Set the item to be removed from the player's inventory after interacting with it.
+     * <p>This will inherently cancel the interact event.</p>
+     *
+     * @return this item
+     */
+    public CustomItem setUseOnInteract() {
+        this.useOnInteract = true;
+        return this;
+    }
+
+    /**
+     * Set the item to be removed from the player's inventory after consuming it.
+     * <p>This will inherently cancel the consume event.</p>
+     *
+     * @return this item
+     */
+    public CustomItem setUseOnConsume() {
+        this.useOnConsume = true;
         return this;
     }
 
@@ -320,6 +345,24 @@ public class CustomItem implements Named {
      */
     public boolean isImmovable() {
         return immovable;
+    }
+
+    /**
+     * Check if the item is removed from the player's inventory after interacting with it.
+     *
+     * @return true if the item is removed from the player's inventory after interacting with it
+     */
+    public boolean isUseOnInteract() {
+        return useOnInteract;
+    }
+
+    /**
+     * Check if the item is removed from the player's inventory after consuming it.
+     *
+     * @return true if the item is removed from the player's inventory after consuming it
+     */
+    public boolean isUseOnConsume() {
+        return useOnConsume;
     }
 
     /**
