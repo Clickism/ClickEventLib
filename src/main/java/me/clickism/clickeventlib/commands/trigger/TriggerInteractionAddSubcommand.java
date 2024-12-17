@@ -1,7 +1,7 @@
 package me.clickism.clickeventlib.commands.trigger;
 
-import me.clickism.clickeventlib.command.*;
-import me.clickism.clickeventlib.command.argument.SelectionArgument;
+import me.clickism.subcommandapi.command.*;
+import me.clickism.subcommandapi.argument.SelectionArgument;
 import me.clickism.clickeventlib.trigger.Trigger;
 import me.clickism.clickeventlib.trigger.TriggerManager;
 import me.clickism.clickeventlib.trigger.TriggerSelectionManager;

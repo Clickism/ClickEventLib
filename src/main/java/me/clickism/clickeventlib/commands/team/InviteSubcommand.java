@@ -1,7 +1,7 @@
 package me.clickism.clickeventlib.commands.team;
 
-import me.clickism.clickeventlib.command.*;
-import me.clickism.clickeventlib.command.argument.SinglePlayerArgument;
+import me.clickism.subcommandapi.command.*;
+import me.clickism.subcommandapi.argument.SinglePlayerArgument;
 import me.clickism.clickeventlib.team.EventTeam;
 import me.clickism.clickeventlib.team.TeamManager;
 import org.bukkit.entity.Player;

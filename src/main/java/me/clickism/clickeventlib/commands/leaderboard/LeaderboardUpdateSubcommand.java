@@ -1,6 +1,6 @@
 package me.clickism.clickeventlib.commands.leaderboard;
 
-import me.clickism.clickeventlib.command.*;
+import me.clickism.subcommandapi.command.*;
 import me.clickism.clickeventlib.leaderboard.LeaderboardManager;
 import org.bukkit.command.CommandSender;
 

@@ -1,8 +1,8 @@
 package me.clickism.clickeventlib.commands.world;
 
 import me.clickism.clickeventlib.location.WorldManager;
-import me.clickism.clickeventlib.command.*;
-import me.clickism.clickeventlib.command.argument.StringArgument;
+import me.clickism.subcommandapi.command.*;
+import me.clickism.subcommandapi.argument.StringArgument;
 import org.bukkit.command.CommandSender;
 
 import java.io.IOException;

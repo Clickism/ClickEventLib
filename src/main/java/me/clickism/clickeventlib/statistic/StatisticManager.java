@@ -6,7 +6,7 @@ import me.clickism.clickeventlib.annotations.RegistryType;
 import me.clickism.clickeventlib.serialization.AutoSaved;
 import me.clickism.clickeventlib.serialization.AutoSaver;
 import me.clickism.clickeventlib.serialization.JSONDataManager;
-import me.clickism.clickeventlib.util.NamedCollection;
+import me.clickism.subcommandapi.util.NamedCollection;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.IOException;
@@ -18,8 +18,6 @@ import java.util.UUID;
  * Statistic manager.
  */
 public class StatisticManager implements AutoSaved {
-    private static final int OPERATIONS_BEFORE_SAVE = 10;
-
     private final JSONDataManager dataManager;
 
     private final NamedCollection<Statistic<?>> statistics = new NamedCollection<>(new ArrayList<>());

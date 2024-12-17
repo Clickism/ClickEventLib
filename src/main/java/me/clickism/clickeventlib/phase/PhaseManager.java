@@ -6,7 +6,7 @@ import me.clickism.clickeventlib.annotations.RegistryType;
 import me.clickism.clickeventlib.location.EventWorld;
 import me.clickism.clickeventlib.location.WorldManager;
 import me.clickism.clickeventlib.serialization.JSONDataManager;
-import me.clickism.clickeventlib.util.NamedCollection;
+import me.clickism.subcommandapi.util.NamedCollection;
 import org.bukkit.Bukkit;
 import org.bukkit.Server;
 import org.bukkit.entity.Player;

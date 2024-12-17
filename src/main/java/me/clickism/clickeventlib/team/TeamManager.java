@@ -2,7 +2,7 @@ package me.clickism.clickeventlib.team;
 
 import me.clickism.clickeventlib.annotations.AutoRegistered;
 import me.clickism.clickeventlib.annotations.RegistryType;
-import me.clickism.clickeventlib.util.NamedCollection;
+import me.clickism.subcommandapi.util.NamedCollection;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;

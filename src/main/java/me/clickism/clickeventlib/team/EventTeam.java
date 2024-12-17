@@ -1,7 +1,7 @@
 package me.clickism.clickeventlib.team;
 
 import me.clickism.clickeventlib.util.Identifier;
-import me.clickism.clickeventlib.util.Named;
+import me.clickism.subcommandapi.util.Named;
 import org.bukkit.ChatColor;
 
 /**

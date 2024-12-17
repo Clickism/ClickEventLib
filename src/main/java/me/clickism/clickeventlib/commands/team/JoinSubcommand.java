@@ -1,9 +1,9 @@
 package me.clickism.clickeventlib.commands.team;
 
 import me.clickism.clickeventlib.chat.ChatManager;
-import me.clickism.clickeventlib.command.*;
-import me.clickism.clickeventlib.command.argument.OfflinePlayersArgument;
-import me.clickism.clickeventlib.command.argument.SelectionArgument;
+import me.clickism.subcommandapi.command.*;
+import me.clickism.subcommandapi.argument.OfflinePlayersArgument;
+import me.clickism.subcommandapi.argument.SelectionArgument;
 import me.clickism.clickeventlib.team.EventTeam;
 import me.clickism.clickeventlib.team.TeamManager;
 import me.clickism.clickeventlib.util.FormatUtils;

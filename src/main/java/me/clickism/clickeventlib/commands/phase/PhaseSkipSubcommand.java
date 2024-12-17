@@ -1,6 +1,6 @@
 package me.clickism.clickeventlib.commands.phase;
 
-import me.clickism.clickeventlib.command.*;
+import me.clickism.subcommandapi.command.*;
 import me.clickism.clickeventlib.phase.Phase;
 import me.clickism.clickeventlib.phase.PhaseManager;
 import org.bukkit.command.CommandSender;

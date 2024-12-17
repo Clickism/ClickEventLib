@@ -1,9 +1,9 @@
 package me.clickism.clickeventlib.commands.world;
 
 import me.clickism.clickeventlib.location.WorldManager;
-import me.clickism.clickeventlib.command.*;
-import me.clickism.clickeventlib.command.argument.EnumArgument;
-import me.clickism.clickeventlib.command.argument.StringArgument;
+import me.clickism.subcommandapi.command.*;
+import me.clickism.subcommandapi.argument.EnumArgument;
+import me.clickism.subcommandapi.argument.StringArgument;
 import org.bukkit.World;
 import org.bukkit.WorldCreator;
 import org.bukkit.WorldType;

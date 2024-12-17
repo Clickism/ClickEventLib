@@ -1,6 +1,6 @@
 package me.clickism.clickeventlib.property;
 
-import me.clickism.clickeventlib.util.Named;
+import me.clickism.subcommandapi.util.Named;
 
 import java.util.function.Function;
 

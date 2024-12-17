@@ -1,9 +1,9 @@
 package me.clickism.clickeventlib.commands.role;
 
 import me.clickism.clickeventlib.chat.ChatManager;
-import me.clickism.clickeventlib.command.*;
-import me.clickism.clickeventlib.command.argument.PlayersArgument;
-import me.clickism.clickeventlib.command.argument.SelectionArgument;
+import me.clickism.subcommandapi.command.*;
+import me.clickism.subcommandapi.argument.PlayersArgument;
+import me.clickism.subcommandapi.argument.SelectionArgument;
 import me.clickism.clickeventlib.team.Role;
 import me.clickism.clickeventlib.team.RoleManager;
 import me.clickism.clickeventlib.util.FormatUtils;

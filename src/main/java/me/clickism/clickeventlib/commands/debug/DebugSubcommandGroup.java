@@ -1,6 +1,6 @@
 package me.clickism.clickeventlib.commands.debug;
 
-import me.clickism.clickeventlib.command.SubcommandGroup;
+import me.clickism.subcommandapi.command.SubcommandGroup;
 
 /**
  * Subcommand group for debug-related commands.

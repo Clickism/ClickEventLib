@@ -1,8 +1,8 @@
 package me.clickism.clickeventlib.commands.chat;
 
 import me.clickism.clickeventlib.chat.MessageType;
-import me.clickism.clickeventlib.command.*;
-import me.clickism.clickeventlib.command.argument.StringArgument;
+import me.clickism.subcommandapi.command.*;
+import me.clickism.subcommandapi.argument.StringArgument;
 import org.bukkit.command.CommandSender;
 
 class ChatAnnounceSubcommand extends Subcommand {

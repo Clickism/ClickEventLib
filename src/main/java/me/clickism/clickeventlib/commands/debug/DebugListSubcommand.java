@@ -1,7 +1,7 @@
 package me.clickism.clickeventlib.commands.debug;
 
 import me.clickism.clickeventlib.chat.MessageType;
-import me.clickism.clickeventlib.command.*;
+import me.clickism.subcommandapi.command.*;
 import me.clickism.clickeventlib.debug.DebugPropertyRegistration;
 import org.bukkit.command.CommandSender;
 

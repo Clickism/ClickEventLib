@@ -1,6 +1,6 @@
 package me.clickism.clickeventlib.leaderboard;
 
-import me.clickism.clickeventlib.util.Named;
+import me.clickism.subcommandapi.util.Named;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;

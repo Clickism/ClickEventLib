@@ -1,8 +1,8 @@
 package me.clickism.clickeventlib.commands.phase;
 
-import me.clickism.clickeventlib.command.*;
-import me.clickism.clickeventlib.command.argument.SelectionArgument;
-import me.clickism.clickeventlib.command.argument.TimeArgument;
+import me.clickism.subcommandapi.command.*;
+import me.clickism.subcommandapi.argument.SelectionArgument;
+import me.clickism.subcommandapi.argument.TimeArgument;
 import me.clickism.clickeventlib.location.EventLocation;
 import me.clickism.clickeventlib.phase.Phase;
 import me.clickism.clickeventlib.phase.PhaseManager;

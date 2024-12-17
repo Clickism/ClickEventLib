@@ -2,7 +2,7 @@ package me.clickism.clickeventlib.leaderboard;
 
 import me.clickism.clickeventlib.location.SafeLocation;
 import me.clickism.clickeventlib.util.DisplayHandler;
-import me.clickism.clickeventlib.util.Named;
+import me.clickism.subcommandapi.util.Named;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;

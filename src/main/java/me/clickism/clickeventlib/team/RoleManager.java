@@ -5,7 +5,7 @@ import com.google.gson.JsonObject;
 import me.clickism.clickeventlib.annotations.AutoRegistered;
 import me.clickism.clickeventlib.annotations.RegistryType;
 import me.clickism.clickeventlib.serialization.JSONDataManager;
-import me.clickism.clickeventlib.util.NamedCollection;
+import me.clickism.subcommandapi.util.NamedCollection;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.Nullable;

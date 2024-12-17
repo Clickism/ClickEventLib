@@ -1,9 +1,9 @@
 package me.clickism.clickeventlib.commands.item;
 
-import me.clickism.clickeventlib.command.*;
-import me.clickism.clickeventlib.command.argument.IntegerArgument;
-import me.clickism.clickeventlib.command.argument.PlayersArgument;
-import me.clickism.clickeventlib.command.argument.SelectionArgument;
+import me.clickism.subcommandapi.command.*;
+import me.clickism.subcommandapi.argument.IntegerArgument;
+import me.clickism.subcommandapi.argument.PlayersArgument;
+import me.clickism.subcommandapi.argument.SelectionArgument;
 import me.clickism.clickeventlib.item.CustomItem;
 import me.clickism.clickeventlib.item.CustomItemManager;
 import me.clickism.clickeventlib.util.FormatUtils;

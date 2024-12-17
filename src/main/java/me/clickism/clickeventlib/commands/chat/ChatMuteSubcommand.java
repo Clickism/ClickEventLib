@@ -1,10 +1,10 @@
 package me.clickism.clickeventlib.commands.chat;
 
 import me.clickism.clickeventlib.chat.ChatManager;
-import me.clickism.clickeventlib.command.*;
-import me.clickism.clickeventlib.command.argument.EnumArgument;
-import me.clickism.clickeventlib.command.argument.PlayersArgument;
 import me.clickism.clickeventlib.util.FormatUtils;
+import me.clickism.subcommandapi.argument.EnumArgument;
+import me.clickism.subcommandapi.argument.PlayersArgument;
+import me.clickism.subcommandapi.command.*;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 

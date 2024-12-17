@@ -1,8 +1,8 @@
 package me.clickism.clickeventlib.commands.role;
 
 import me.clickism.clickeventlib.chat.ChatManager;
-import me.clickism.clickeventlib.command.*;
-import me.clickism.clickeventlib.command.argument.PlayersArgument;
+import me.clickism.subcommandapi.command.*;
+import me.clickism.subcommandapi.argument.PlayersArgument;
 import me.clickism.clickeventlib.team.RoleManager;
 import me.clickism.clickeventlib.util.FormatUtils;
 import org.bukkit.command.CommandSender;

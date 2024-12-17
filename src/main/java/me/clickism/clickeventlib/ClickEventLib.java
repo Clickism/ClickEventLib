@@ -1,8 +1,7 @@
 package me.clickism.clickeventlib;
 
 import me.clickism.clickeventlib.chat.ChatManager;
-import me.clickism.clickeventlib.command.CommandManager;
-import me.clickism.clickeventlib.command.SubcommandGroup;
+import me.clickism.clickeventlib.commands.EventCommandManager;
 import me.clickism.clickeventlib.commands.chat.ChatSubcommandGroup;
 import me.clickism.clickeventlib.commands.debug.DebugSubcommandGroup;
 import me.clickism.clickeventlib.commands.item.ItemSubcommandGroup;
@@ -30,6 +29,8 @@ import me.clickism.clickeventlib.team.Role;
 import me.clickism.clickeventlib.team.RoleManager;
 import me.clickism.clickeventlib.team.TeamManager;
 import me.clickism.clickeventlib.util.Identifier;
+import me.clickism.subcommandapi.command.CommandManager;
+import me.clickism.subcommandapi.command.SubcommandGroup;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**
@@ -68,7 +69,7 @@ public final class ClickEventLib extends JavaPlugin {
             EventBar eventBar = new EventBar(this, EventBar.DEFAULT_TITLE);
             this.phaseManager = new PhaseManager(this, eventBar, "phase.json", worldManager);
             this.customItemManager = new CustomItemManager(this);
-            this.commandManager = new CommandManager();
+            this.commandManager = new EventCommandManager();
             this.locationManager = new EventLocationManager(this, "locations.json");
             this.statisticManager = new StatisticManager(this, autoSaver, 30, "statistics.json");
             this.leaderboardManager = new LeaderboardManager(this, autoSaver, 30, "leaderboards.json");

@@ -1,8 +1,8 @@
 package me.clickism.clickeventlib.commands.trigger;
 
-import me.clickism.clickeventlib.command.*;
-import me.clickism.clickeventlib.command.argument.EnumArgument;
-import me.clickism.clickeventlib.command.argument.MultipleSelectionArgument;
+import me.clickism.subcommandapi.command.*;
+import me.clickism.subcommandapi.argument.EnumArgument;
+import me.clickism.subcommandapi.argument.MultipleSelectionArgument;
 import me.clickism.clickeventlib.debug.LocationDisplayer;
 import me.clickism.clickeventlib.location.SafeLocation;
 import me.clickism.clickeventlib.trigger.Trigger;

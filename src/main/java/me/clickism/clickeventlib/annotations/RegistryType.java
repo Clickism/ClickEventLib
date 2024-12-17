@@ -9,14 +9,6 @@ public enum RegistryType {
      */
     EVENT,
     /**
-     * Represents a command registration.
-     */
-    COMMAND,
-    /**
-     * Represents a tab completer registration.
-     */
-    TAB_COMPLETER,
-    /**
      * Represents a save on disable registration.
      */
     SAVE_ON_DISABLE,

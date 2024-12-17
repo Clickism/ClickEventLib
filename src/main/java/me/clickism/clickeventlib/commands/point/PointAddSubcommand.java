@@ -1,6 +1,6 @@
 package me.clickism.clickeventlib.commands.point;
 
-import me.clickism.clickeventlib.command.*;
+import me.clickism.subcommandapi.command.*;
 import me.clickism.clickeventlib.location.PointManager;
 import me.clickism.clickeventlib.util.Utils;
 import org.bukkit.entity.Player;

@@ -1,7 +1,7 @@
 package me.clickism.clickeventlib.commands.world;
 
 import me.clickism.clickeventlib.location.WorldManager;
-import me.clickism.clickeventlib.command.SubcommandGroup;
+import me.clickism.subcommandapi.command.SubcommandGroup;
 
 /**
  * Subcommand group for world-related commands.

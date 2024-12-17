@@ -1,7 +1,7 @@
 package me.clickism.clickeventlib.commands.world;
 
 import me.clickism.clickeventlib.location.WorldManager;
-import me.clickism.clickeventlib.command.*;
+import me.clickism.subcommandapi.command.*;
 import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;

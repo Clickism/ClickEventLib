@@ -1,9 +1,9 @@
 package me.clickism.clickeventlib.commands.debug;
 
-import me.clickism.clickeventlib.command.*;
-import me.clickism.clickeventlib.command.argument.Argument;
-import me.clickism.clickeventlib.command.argument.SelectionArgument;
-import me.clickism.clickeventlib.command.argument.StringArgument;
+import me.clickism.subcommandapi.command.*;
+import me.clickism.subcommandapi.argument.Argument;
+import me.clickism.subcommandapi.argument.SelectionArgument;
+import me.clickism.subcommandapi.argument.StringArgument;
 import me.clickism.clickeventlib.debug.DebugPropertyRegistration;
 import me.clickism.clickeventlib.property.Property;
 import org.bukkit.command.CommandSender;

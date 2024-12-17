@@ -1,7 +1,7 @@
 package me.clickism.clickeventlib.commands.location;
 
-import me.clickism.clickeventlib.command.*;
-import me.clickism.clickeventlib.command.argument.SelectionArgument;
+import me.clickism.subcommandapi.command.*;
+import me.clickism.subcommandapi.argument.SelectionArgument;
 import me.clickism.clickeventlib.location.EventLocation;
 import me.clickism.clickeventlib.location.EventLocationManager;
 import org.bukkit.Location;

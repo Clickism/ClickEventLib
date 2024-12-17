@@ -6,7 +6,7 @@ import com.google.gson.JsonObject;
 import me.clickism.clickeventlib.item.CustomItem;
 import me.clickism.clickeventlib.item.CustomItemManager;
 import me.clickism.clickeventlib.serialization.JSONDataManager;
-import me.clickism.clickeventlib.util.NamedCollection;
+import me.clickism.subcommandapi.util.NamedCollection;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.plugin.java.JavaPlugin;

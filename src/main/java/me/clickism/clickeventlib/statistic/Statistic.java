@@ -1,7 +1,7 @@
 package me.clickism.clickeventlib.statistic;
 
 import me.clickism.clickeventlib.leaderboard.LeaderboardEntryProvider;
-import me.clickism.clickeventlib.util.Named;
+import me.clickism.subcommandapi.util.Named;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

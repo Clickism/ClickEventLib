@@ -1,8 +1,8 @@
 package me.clickism.clickeventlib.commands.statistic;
 
-import me.clickism.clickeventlib.command.*;
-import me.clickism.clickeventlib.command.argument.OfflinePlayersArgument;
-import me.clickism.clickeventlib.command.argument.SelectionArgument;
+import me.clickism.subcommandapi.command.*;
+import me.clickism.subcommandapi.argument.OfflinePlayersArgument;
+import me.clickism.subcommandapi.argument.SelectionArgument;
 import me.clickism.clickeventlib.statistic.Statistic;
 import me.clickism.clickeventlib.statistic.StatisticManager;
 import org.bukkit.OfflinePlayer;

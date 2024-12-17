@@ -2,8 +2,8 @@ package me.clickism.clickeventlib.item;
 
 import me.clickism.clickeventlib.ClickEventLib;
 import me.clickism.clickeventlib.util.Identifier;
-import me.clickism.clickeventlib.util.Named;
 import me.clickism.clickeventlib.util.Utils;
+import me.clickism.subcommandapi.util.Named;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;

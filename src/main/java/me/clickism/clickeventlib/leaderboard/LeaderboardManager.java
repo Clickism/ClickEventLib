@@ -9,7 +9,7 @@ import me.clickism.clickeventlib.location.SafeLocation;
 import me.clickism.clickeventlib.serialization.AutoSaved;
 import me.clickism.clickeventlib.serialization.AutoSaver;
 import me.clickism.clickeventlib.serialization.JSONDataManager;
-import me.clickism.clickeventlib.util.NamedCollection;
+import me.clickism.subcommandapi.util.NamedCollection;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 

@@ -2,7 +2,7 @@ package me.clickism.clickeventlib.phase;
 
 import me.clickism.clickeventlib.location.EventLocation;
 import me.clickism.clickeventlib.location.EventWorld;
-import me.clickism.clickeventlib.util.Named;
+import me.clickism.subcommandapi.util.Named;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;

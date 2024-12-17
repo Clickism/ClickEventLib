@@ -1,7 +1,7 @@
 package me.clickism.clickeventlib.debug;
 
 import me.clickism.clickeventlib.property.Property;
-import me.clickism.clickeventlib.util.NamedCollection;
+import me.clickism.subcommandapi.util.NamedCollection;
 
 import java.util.ArrayList;
 import java.util.Optional;

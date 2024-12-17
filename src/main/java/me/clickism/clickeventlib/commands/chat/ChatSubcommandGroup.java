@@ -1,7 +1,7 @@
 package me.clickism.clickeventlib.commands.chat;
 
 import me.clickism.clickeventlib.chat.ChatManager;
-import me.clickism.clickeventlib.command.SubcommandGroup;
+import me.clickism.subcommandapi.command.SubcommandGroup;
 
 /**
  * Subcommand group for chat-related commands.

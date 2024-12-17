@@ -1,6 +1,6 @@
 package me.clickism.clickeventlib.location;
 
-import me.clickism.clickeventlib.util.Named;
+import me.clickism.subcommandapi.util.Named;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
