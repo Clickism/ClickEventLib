@@ -4,7 +4,7 @@ plugins {
 }
 
 group = 'me.clickism'
-version = '0.1'
+version = plugin_version
 
 repositories {
     mavenCentral()
