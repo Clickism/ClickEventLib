@@ -61,14 +61,15 @@ public class WorldManager implements Listener {
     @Nullable
     public World getWorld(String name) {
         World world = worldMap.get(name);
-        if (worldMap.containsKey(name) && world == null) {
-            try {
-                importWorld(name);
-            } catch (IOException e) {
-                return null;
-            }
+        if (world != null) {
+            return world;
         }
-        return worldMap.get(name);
+        try {
+            importWorld(name);
+            return worldMap.get(name);
+        } catch (IOException e) {
+            return null;
+        }
     }
 
     /**
