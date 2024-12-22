@@ -12,7 +12,7 @@ public class VanillaItem extends CustomItem {
      * Vanilla item identifier.
      */
     final static Identifier VANILLA_IDENTIFIER = new Identifier("minecraft", "item");
-    
+
     private VanillaItem(Material material) {
         super(VANILLA_IDENTIFIER, material);
     }
@@ -21,6 +21,7 @@ public class VanillaItem extends CustomItem {
      * Creates a new vanilla custom item. Attempting to register a vanilla custom item will throw an exception.
      *
      * @param material the material of the item
+     * @return the vanilla custom item
      */
     public static VanillaItem of(Material material) {
         return new VanillaItem(material);
