@@ -1,6 +1,7 @@
 package me.clickism.clickeventlib.item;
 
 import me.clickism.clickeventlib.ClickEventLib;
+import me.clickism.clickeventlib.annotations.Colorized;
 import me.clickism.clickeventlib.util.Identifier;
 import me.clickism.clickeventlib.util.Utils;
 import me.clickism.subcommandapi.util.Named;
@@ -59,7 +60,8 @@ public class CustomItem implements Named {
      * @param material material of the item
      */
     public CustomItem(Identifier id, Material material) {
-        this(id, Objects.requireNonNull(new ItemStack(material).getItemMeta()).getDisplayName(), material);
+        this.id = id;
+        this.item = buildItem(id, material);
     }
 
     /**
@@ -70,8 +72,8 @@ public class CustomItem implements Named {
      * @param material    material of the item
      */
     public CustomItem(Identifier id, String displayName, Material material) {
-        this.id = id;
-        this.item = buildItem(id, displayName, material);
+        this(id, material);
+        setDisplayName(displayName);
     }
 
     /**
@@ -127,6 +129,27 @@ public class CustomItem implements Named {
     public CustomItem setUseOnConsume() {
         this.useOnConsume = true;
         return this;
+    }
+
+    /**
+     * Set the item to be removed from the player's inventory after interacting with it.
+     *
+     * @param name display name
+     * @return this item
+     */
+    public CustomItem setDisplayName(@Colorized String name) {
+        applyToMeta(meta -> meta.setDisplayName(Utils.colorize(name)));
+        return this;
+    }
+
+    /**
+     * Adds an enchantment to the item with a level of 1.
+     *
+     * @param enchantment enchantment
+     * @return this item
+     */
+    public CustomItem addEnchant(Enchantment enchantment) {
+        return addEnchant(enchantment, 1);
     }
 
     /**
@@ -415,14 +438,13 @@ public class CustomItem implements Named {
     }
 
     /**
-     * Builds an item with the specified properties and sets the given id inside its persistent data container.
+     * Builds an item stack with the required tag. See {@link #ITEM_ID_KEY}.
      */
-    private static ItemStack buildItem(Identifier id, String name, Material mat) {
+    private static ItemStack buildItem(Identifier id, Material mat) {
         ItemStack item = new ItemStack(mat);
         ItemMeta meta = item.getItemMeta();
         if (meta == null) return item;
         meta.getPersistentDataContainer().set(ITEM_ID_KEY, PersistentDataType.STRING, id.toString());
-        meta.setDisplayName(Utils.colorize(name));
         item.setItemMeta(meta);
         return item;
     }
