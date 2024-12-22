@@ -342,7 +342,7 @@ public class PhaseManager implements Listener {
         Player player = event.getPlayer();
         currentPhase.onJoinServer(player);
     }
-    
+
     @EventHandler
     private void onLeave(PlayerQuitEvent event) {
         if (currentPhase == null) return;

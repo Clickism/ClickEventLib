@@ -105,7 +105,7 @@ public class GamePlayerSet {
     public boolean isDisqualified(Player player) {
         return isDisqualified(player.getUniqueId());
     }
-    
+
     /**
      * Checks if a player is disqualified.
      *

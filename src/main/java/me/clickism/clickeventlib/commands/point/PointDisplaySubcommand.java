@@ -1,11 +1,11 @@
 package me.clickism.clickeventlib.commands.point;
 
 import me.clickism.clickeventlib.chat.MessageType;
-import me.clickism.subcommandapi.command.*;
 import me.clickism.clickeventlib.debug.LocationDisplayer;
 import me.clickism.clickeventlib.location.EventLocation;
 import me.clickism.clickeventlib.location.PointManager;
 import me.clickism.clickeventlib.util.Utils;
+import me.clickism.subcommandapi.command.*;
 import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Material;

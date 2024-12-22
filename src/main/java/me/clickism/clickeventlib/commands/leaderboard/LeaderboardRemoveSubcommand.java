@@ -1,17 +1,17 @@
 package me.clickism.clickeventlib.commands.leaderboard;
 
-import me.clickism.subcommandapi.command.*;
-import me.clickism.subcommandapi.argument.SelectionArgument;
 import me.clickism.clickeventlib.leaderboard.Leaderboard;
 import me.clickism.clickeventlib.leaderboard.LeaderboardManager;
+import me.clickism.subcommandapi.argument.SelectionArgument;
+import me.clickism.subcommandapi.command.*;
 import org.bukkit.command.CommandSender;
 
 class LeaderboardRemoveSubcommand extends Subcommand {
-    
+
     private final SelectionArgument<Leaderboard> leaderboardArgument;
-    
+
     private final LeaderboardManager leaderboardManager;
-    
+
     public LeaderboardRemoveSubcommand(LeaderboardManager leaderboardManager) {
         super("remove", true);
         this.leaderboardManager = leaderboardManager;

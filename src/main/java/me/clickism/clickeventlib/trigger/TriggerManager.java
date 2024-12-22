@@ -300,7 +300,7 @@ public class TriggerManager implements Listener {
         clearTriggerBoxes(trigger);
         save();
     }
-    
+
     private void clearTriggerBoxes(Trigger trigger) {
         triggerBoxes.removeIf(box -> box.getTrigger().equals(trigger));
         triggerToBoxesMap.remove(trigger);
@@ -323,7 +323,7 @@ public class TriggerManager implements Listener {
         clearTriggerInteractions(trigger);
         save();
     }
-    
+
     private void clearTriggerInteractions(Trigger trigger) {
         triggerInteractionMap.entrySet().removeIf(entry -> entry.getValue().equals(trigger));
     }
@@ -460,7 +460,7 @@ public class TriggerManager implements Listener {
         if (!player.isSneaking()) {
             MessageType.FAIL.send(player,
                     "There is a trigger interaction &l" + triggerName + "&c at this block. " +
-                            "&lShift + break &cto remove this interaction first.");
+                    "&lShift + break &cto remove this interaction first.");
             return;
         }
         SafeLocation safeLocation = new SafeLocation(location);

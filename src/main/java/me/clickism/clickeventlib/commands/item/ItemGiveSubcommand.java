@@ -1,16 +1,15 @@
 package me.clickism.clickeventlib.commands.item;
 
-import me.clickism.subcommandapi.command.*;
-import me.clickism.subcommandapi.argument.IntegerArgument;
-import me.clickism.subcommandapi.argument.PlayersArgument;
-import me.clickism.subcommandapi.argument.SelectionArgument;
 import me.clickism.clickeventlib.item.CustomItem;
 import me.clickism.clickeventlib.item.CustomItemManager;
 import me.clickism.clickeventlib.util.FormatUtils;
 import me.clickism.clickeventlib.util.Utils;
+import me.clickism.subcommandapi.argument.IntegerArgument;
+import me.clickism.subcommandapi.argument.PlayersArgument;
+import me.clickism.subcommandapi.argument.SelectionArgument;
+import me.clickism.subcommandapi.command.*;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-
 import java.util.Collection;
 
 class ItemGiveSubcommand extends Subcommand {

@@ -369,7 +369,7 @@ public abstract class MessageType {
         Bukkit.getOnlinePlayers().forEach(player -> sendTitleSilently(player, title, subtitle, fadeIn, stay, fadeOut));
         logTitle(title, subtitle);
     }
-    
+
     private void logTitle(String title, String subtitle) {
         if (title.isEmpty()) {
             log("Subtitle: " + subtitle);
@@ -381,7 +381,7 @@ public abstract class MessageType {
         }
         log("Title: " + title + " Subtitle: " + subtitle);
     }
-    
+
     private void logActionbar(String message) {
         log("Actionbar: " + message);
     }

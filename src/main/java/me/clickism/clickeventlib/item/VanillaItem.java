@@ -12,7 +12,7 @@ public class VanillaItem extends CustomItem {
      * Vanilla item identifier.
      */
     final static Identifier VANILLA_IDENTIFIER = new Identifier("minecraft", "item");
-    
+
     /**
      * Creates a new vanilla custom item. Attempting to register a vanilla custom item will throw an exception.
      *

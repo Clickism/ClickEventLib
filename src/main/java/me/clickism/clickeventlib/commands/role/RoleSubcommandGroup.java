@@ -1,8 +1,8 @@
 package me.clickism.clickeventlib.commands.role;
 
 import me.clickism.clickeventlib.chat.ChatManager;
-import me.clickism.subcommandapi.command.SubcommandGroup;
 import me.clickism.clickeventlib.team.RoleManager;
+import me.clickism.subcommandapi.command.SubcommandGroup;
 
 /**
  * Subcommand group for role management.

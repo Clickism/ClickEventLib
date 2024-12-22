@@ -1,7 +1,7 @@
 package me.clickism.clickeventlib.commands.phase;
 
-import me.clickism.subcommandapi.command.SubcommandGroup;
 import me.clickism.clickeventlib.phase.PhaseManager;
+import me.clickism.subcommandapi.command.SubcommandGroup;
 
 /**
  * Subcommand group for phase-related commands.

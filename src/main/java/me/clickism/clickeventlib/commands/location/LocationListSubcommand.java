@@ -1,7 +1,7 @@
 package me.clickism.clickeventlib.commands.location;
 
-import me.clickism.subcommandapi.command.*;
 import me.clickism.clickeventlib.location.EventLocationManager;
+import me.clickism.subcommandapi.command.*;
 import org.bukkit.entity.Player;
 
 class LocationListSubcommand extends PlayerOnlySubcommand {

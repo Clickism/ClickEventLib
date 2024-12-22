@@ -1,13 +1,13 @@
 package me.clickism.clickeventlib.commands.leaderboard;
 
-import me.clickism.subcommandapi.command.*;
 import me.clickism.clickeventlib.leaderboard.LeaderboardManager;
+import me.clickism.subcommandapi.command.*;
 import org.bukkit.command.CommandSender;
 
 class LeaderboardUpdateSubcommand extends Subcommand {
-    
+
     private final LeaderboardManager leaderboardManager;
-    
+
     public LeaderboardUpdateSubcommand(LeaderboardManager leaderboardManager) {
         super("update", true);
         this.leaderboardManager = leaderboardManager;

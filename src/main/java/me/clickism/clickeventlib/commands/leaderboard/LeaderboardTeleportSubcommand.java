@@ -1,16 +1,16 @@
 package me.clickism.clickeventlib.commands.leaderboard;
 
-import me.clickism.subcommandapi.command.*;
-import me.clickism.subcommandapi.argument.SelectionArgument;
 import me.clickism.clickeventlib.leaderboard.Leaderboard;
 import me.clickism.clickeventlib.leaderboard.LeaderboardManager;
+import me.clickism.subcommandapi.argument.SelectionArgument;
+import me.clickism.subcommandapi.command.*;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 class LeaderboardTeleportSubcommand extends PlayerOnlySubcommand {
-    
+
     private final SelectionArgument<Leaderboard> leaderboardArgument;
-    
+
     public LeaderboardTeleportSubcommand(LeaderboardManager leaderboardManager) {
         super("teleport", true);
         this.leaderboardArgument = new SelectionArgument<>("leaderboard", true, leaderboardManager.getLeaderboards());

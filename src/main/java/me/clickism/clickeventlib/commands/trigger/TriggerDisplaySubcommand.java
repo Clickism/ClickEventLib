@@ -1,8 +1,5 @@
 package me.clickism.clickeventlib.commands.trigger;
 
-import me.clickism.subcommandapi.command.*;
-import me.clickism.subcommandapi.argument.EnumArgument;
-import me.clickism.subcommandapi.argument.MultipleSelectionArgument;
 import me.clickism.clickeventlib.debug.LocationDisplayer;
 import me.clickism.clickeventlib.location.SafeLocation;
 import me.clickism.clickeventlib.trigger.Trigger;
@@ -10,13 +7,15 @@ import me.clickism.clickeventlib.trigger.TriggerBox;
 import me.clickism.clickeventlib.trigger.TriggerManager;
 import me.clickism.clickeventlib.util.FormatUtils;
 import me.clickism.clickeventlib.util.Utils;
+import me.clickism.subcommandapi.argument.EnumArgument;
+import me.clickism.subcommandapi.argument.MultipleSelectionArgument;
+import me.clickism.subcommandapi.command.*;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
-
 import java.util.*;
 
 class TriggerDisplaySubcommand extends PlayerOnlySubcommand {

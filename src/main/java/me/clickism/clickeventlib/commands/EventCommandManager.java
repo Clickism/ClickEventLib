@@ -16,7 +16,7 @@ public class EventCommandManager extends CommandManager {
     public EventCommandManager() {
         super();
     }
-    
+
     @Override
     protected void sendMessage(CommandSender sender, CommandResult.CommandResultType resultType, @NotNull String message) {
         switch (resultType) {

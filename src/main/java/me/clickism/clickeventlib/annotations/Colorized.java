@@ -1,6 +1,7 @@
 package me.clickism.clickeventlib.annotations;
 
 import me.clickism.clickeventlib.util.Utils;
+
 import java.lang.annotation.Documented;
 
 /**

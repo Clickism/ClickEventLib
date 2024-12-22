@@ -1,7 +1,7 @@
 package me.clickism.clickeventlib.commands.statistic;
 
-import me.clickism.subcommandapi.command.SubcommandGroup;
 import me.clickism.clickeventlib.statistic.StatisticManager;
+import me.clickism.subcommandapi.command.SubcommandGroup;
 
 /**
  * Subcommand group for statistic commands.

@@ -1,9 +1,9 @@
 package me.clickism.clickeventlib.commands.statistic;
 
-import me.clickism.subcommandapi.command.*;
-import me.clickism.subcommandapi.argument.SelectionArgument;
 import me.clickism.clickeventlib.statistic.Statistic;
 import me.clickism.clickeventlib.statistic.StatisticManager;
+import me.clickism.subcommandapi.argument.SelectionArgument;
+import me.clickism.subcommandapi.command.*;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 

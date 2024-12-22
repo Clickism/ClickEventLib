@@ -1,8 +1,8 @@
 package me.clickism.clickeventlib.commands.trigger;
 
-import me.clickism.subcommandapi.command.*;
 import me.clickism.clickeventlib.trigger.Trigger;
 import me.clickism.clickeventlib.trigger.TriggerSelectionManager;
+import me.clickism.subcommandapi.command.*;
 import org.bukkit.entity.Player;
 
 class TriggerCancelSubcommand extends PlayerOnlySubcommand {

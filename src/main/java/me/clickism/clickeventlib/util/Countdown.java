@@ -46,7 +46,7 @@ public class Countdown {
     public BukkitTask start(JavaPlugin plugin) {
         return new BukkitRunnable() {
             private int remaining = Countdown.this.seconds;
-            
+
             @Override
             public void run() {
                 tick(this, remaining);

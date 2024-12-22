@@ -122,7 +122,7 @@ public class CustomItemManager implements Listener {
         if (player.getGameMode() == GameMode.CREATIVE) return;
         // Prevent moving immovable item inside the inventory
         if (customItem.isImmovable()) {
-            Utils.fail(player); 
+            Utils.fail(player);
             event.setCancelled(true);
         }
     }

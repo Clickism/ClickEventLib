@@ -43,8 +43,9 @@ public abstract class Trigger implements Named {
 
     /**
      * Triggered when a player is teleported out of a trigger box.
+     *
      * @param player player teleported out
-     * @param box trigger box teleported out of
+     * @param box    trigger box teleported out of
      */
     public void onTeleportExit(Player player, @Nullable TriggerBox box) {
         // Do nothing by default

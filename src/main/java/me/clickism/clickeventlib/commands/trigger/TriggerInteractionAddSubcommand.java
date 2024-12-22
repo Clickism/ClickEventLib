@@ -1,11 +1,11 @@
 package me.clickism.clickeventlib.commands.trigger;
 
-import me.clickism.subcommandapi.command.*;
-import me.clickism.subcommandapi.argument.SelectionArgument;
 import me.clickism.clickeventlib.trigger.Trigger;
 import me.clickism.clickeventlib.trigger.TriggerManager;
 import me.clickism.clickeventlib.trigger.TriggerSelectionManager;
 import me.clickism.clickeventlib.util.Utils;
+import me.clickism.subcommandapi.argument.SelectionArgument;
+import me.clickism.subcommandapi.command.*;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -33,7 +33,7 @@ class TriggerInteractionAddSubcommand extends PlayerOnlySubcommand {
         String triggerName = trigger.getName();
         return CommandResult.success(
                 "Selecting trigger &l" + triggerName + ":\n" +
-                        "&aUse the " + itemName + "&a to create a trigger."
+                "&aUse the " + itemName + "&a to create a trigger."
         );
     }
 

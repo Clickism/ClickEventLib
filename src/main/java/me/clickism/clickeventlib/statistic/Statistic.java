@@ -29,7 +29,7 @@ public class Statistic<T> implements Named, LeaderboardEntryProvider {
      * Without a comparator, the leaderboard order is undefined.
      *
      * @param type         type of the statistic
-     * @param name           identifier of the statistic
+     * @param name         identifier of the statistic
      * @param defaultValue default value of the statistic
      */
     public Statistic(StatisticType<T> type, String name, T defaultValue) {
@@ -41,7 +41,7 @@ public class Statistic<T> implements Named, LeaderboardEntryProvider {
      * The comparator is used for the leaderboard.
      *
      * @param type         type of the statistic
-     * @param name           identifier of the statistic
+     * @param name         identifier of the statistic
      * @param defaultValue default value of the statistic
      * @param comparator   comparator for the leaderboard
      */

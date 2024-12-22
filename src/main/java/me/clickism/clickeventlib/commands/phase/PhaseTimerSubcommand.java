@@ -1,8 +1,8 @@
 package me.clickism.clickeventlib.commands.phase;
 
-import me.clickism.subcommandapi.command.*;
-import me.clickism.subcommandapi.argument.TimeArgument;
 import me.clickism.clickeventlib.phase.PhaseManager;
+import me.clickism.subcommandapi.argument.TimeArgument;
+import me.clickism.subcommandapi.command.*;
 import org.bukkit.command.CommandSender;
 
 class PhaseTimerSubcommand extends Subcommand {

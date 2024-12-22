@@ -1,15 +1,14 @@
 package me.clickism.clickeventlib.commands.statistic;
 
-import me.clickism.subcommandapi.command.*;
-import me.clickism.subcommandapi.argument.OfflinePlayersArgument;
-import me.clickism.subcommandapi.argument.SelectionArgument;
-import me.clickism.subcommandapi.argument.StringArgument;
 import me.clickism.clickeventlib.statistic.Statistic;
 import me.clickism.clickeventlib.statistic.StatisticManager;
 import me.clickism.clickeventlib.util.FormatUtils;
+import me.clickism.subcommandapi.argument.OfflinePlayersArgument;
+import me.clickism.subcommandapi.argument.SelectionArgument;
+import me.clickism.subcommandapi.argument.StringArgument;
+import me.clickism.subcommandapi.command.*;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
-
 import java.util.Collection;
 
 class StatisticSetSubcommand extends Subcommand {
@@ -37,6 +36,6 @@ class StatisticSetSubcommand extends Subcommand {
             throw new CommandException(exception.getMessage());
         }
         return CommandResult.success("Set statistic &l" + statistic.getName() + "&a to &f&l" + value +
-                "&a for players: &l" + FormatUtils.formatPlayers(players));
+                                     "&a for players: &l" + FormatUtils.formatPlayers(players));
     }
 }

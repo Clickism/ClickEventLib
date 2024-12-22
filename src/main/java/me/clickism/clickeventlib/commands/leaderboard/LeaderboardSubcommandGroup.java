@@ -1,7 +1,7 @@
 package me.clickism.clickeventlib.commands.leaderboard;
 
-import me.clickism.subcommandapi.command.SubcommandGroup;
 import me.clickism.clickeventlib.leaderboard.LeaderboardManager;
+import me.clickism.subcommandapi.command.SubcommandGroup;
 
 /**
  * Leaderboard group for leaderboard commands.

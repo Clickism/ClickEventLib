@@ -1,16 +1,15 @@
 package me.clickism.clickeventlib.commands.team;
 
 import me.clickism.clickeventlib.chat.ChatManager;
-import me.clickism.subcommandapi.command.*;
-import me.clickism.subcommandapi.argument.OfflinePlayersArgument;
-import me.clickism.subcommandapi.argument.SelectionArgument;
 import me.clickism.clickeventlib.team.EventTeam;
 import me.clickism.clickeventlib.team.TeamManager;
 import me.clickism.clickeventlib.util.FormatUtils;
+import me.clickism.subcommandapi.argument.OfflinePlayersArgument;
+import me.clickism.subcommandapi.argument.SelectionArgument;
+import me.clickism.subcommandapi.command.*;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-
 import java.util.List;
 
 /**

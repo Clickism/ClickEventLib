@@ -1,9 +1,9 @@
 package me.clickism.clickeventlib.commands.team;
 
-import me.clickism.subcommandapi.command.*;
-import me.clickism.subcommandapi.argument.SinglePlayerArgument;
 import me.clickism.clickeventlib.team.EventTeam;
 import me.clickism.clickeventlib.team.TeamManager;
+import me.clickism.subcommandapi.argument.SinglePlayerArgument;
+import me.clickism.subcommandapi.command.*;
 import org.bukkit.entity.Player;
 
 /**
@@ -48,7 +48,7 @@ public class InviteSubcommand extends PlayerOnlySubcommand {
                 }
                 yield CommandResult.success("Invited &l" + player.getName() + " &ato your team.");
             }
-            case OPERATOR ->{
+            case OPERATOR -> {
                 if (!sender.isOp()) {
                     yield CommandResult.failure("You can't invite players to this team.");
                 }

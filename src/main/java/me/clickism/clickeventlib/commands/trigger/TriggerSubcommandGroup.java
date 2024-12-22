@@ -1,7 +1,7 @@
 package me.clickism.clickeventlib.commands.trigger;
 
-import me.clickism.subcommandapi.command.SubcommandGroup;
 import me.clickism.clickeventlib.trigger.TriggerManager;
+import me.clickism.subcommandapi.command.SubcommandGroup;
 
 /**
  * Subcommand group for trigger-related commands.

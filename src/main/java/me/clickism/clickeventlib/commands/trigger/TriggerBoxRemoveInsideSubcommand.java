@@ -1,14 +1,13 @@
 package me.clickism.clickeventlib.commands.trigger;
 
-import me.clickism.subcommandapi.command.*;
-import me.clickism.subcommandapi.argument.SelectionArgument;
 import me.clickism.clickeventlib.trigger.Trigger;
 import me.clickism.clickeventlib.trigger.TriggerBox;
 import me.clickism.clickeventlib.trigger.TriggerManager;
 import me.clickism.clickeventlib.util.FormatUtils;
+import me.clickism.subcommandapi.argument.SelectionArgument;
+import me.clickism.subcommandapi.command.*;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;

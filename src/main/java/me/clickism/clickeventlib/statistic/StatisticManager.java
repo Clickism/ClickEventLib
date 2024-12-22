@@ -50,7 +50,7 @@ public class StatisticManager implements AutoSaved {
         load(statistic);
         return statistic;
     }
-    
+
     /**
      * Get the collection of all statistics.
      *

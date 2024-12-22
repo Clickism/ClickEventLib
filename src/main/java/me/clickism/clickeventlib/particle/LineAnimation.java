@@ -58,7 +58,7 @@ public class LineAnimation extends ParticleAnimation {
 
         new BukkitRunnable() {
             private long currentTick = 0;
-            
+
             @Override
             public void run() {
                 if (currentTick > ticks) {

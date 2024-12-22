@@ -1,9 +1,9 @@
 package me.clickism.clickeventlib.commands.point;
 
-import me.clickism.subcommandapi.command.*;
-import me.clickism.subcommandapi.argument.SelectionArgument;
 import me.clickism.clickeventlib.location.EventLocation;
 import me.clickism.clickeventlib.location.PointManager;
+import me.clickism.subcommandapi.argument.SelectionArgument;
+import me.clickism.subcommandapi.command.*;
 import org.bukkit.entity.Player;
 
 class PointTeleportSubcommand extends PlayerOnlySubcommand {

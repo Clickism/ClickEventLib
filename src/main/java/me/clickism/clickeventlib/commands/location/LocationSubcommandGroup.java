@@ -1,7 +1,7 @@
 package me.clickism.clickeventlib.commands.location;
 
-import me.clickism.subcommandapi.command.SubcommandGroup;
 import me.clickism.clickeventlib.location.EventLocationManager;
+import me.clickism.subcommandapi.command.SubcommandGroup;
 
 /**
  * Subcommand group for location-related commands.

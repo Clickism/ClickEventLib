@@ -1,21 +1,20 @@
 package me.clickism.clickeventlib.commands.role;
 
 import me.clickism.clickeventlib.chat.ChatManager;
-import me.clickism.subcommandapi.command.*;
-import me.clickism.subcommandapi.argument.PlayersArgument;
 import me.clickism.clickeventlib.team.RoleManager;
 import me.clickism.clickeventlib.util.FormatUtils;
+import me.clickism.subcommandapi.argument.PlayersArgument;
+import me.clickism.subcommandapi.command.*;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-
 import java.util.List;
 
 class RoleRemoveSubcommand extends Subcommand {
     private static final PlayersArgument PLAYERS_ARGUMENT = new PlayersArgument("players", true);
-    
+
     private final RoleManager roleManager;
     private final ChatManager chatManager;
-    
+
     public RoleRemoveSubcommand(RoleManager roleManager, ChatManager chatManager) {
         super("remove", true);
         this.roleManager = roleManager;

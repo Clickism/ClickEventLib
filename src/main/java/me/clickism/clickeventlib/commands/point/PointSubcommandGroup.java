@@ -1,7 +1,7 @@
 package me.clickism.clickeventlib.commands.point;
 
-import me.clickism.subcommandapi.command.SubcommandGroup;
 import me.clickism.clickeventlib.location.PointManager;
+import me.clickism.subcommandapi.command.SubcommandGroup;
 
 /**
  * Subcommand group for point commands.

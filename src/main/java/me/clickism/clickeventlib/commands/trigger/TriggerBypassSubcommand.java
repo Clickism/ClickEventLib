@@ -1,11 +1,12 @@
 package me.clickism.clickeventlib.commands.trigger;
 
-import me.clickism.subcommandapi.command.*;
 import me.clickism.clickeventlib.trigger.TriggerManager;
+import me.clickism.subcommandapi.command.*;
 import org.bukkit.entity.Player;
 
 class TriggerBypassSubcommand extends PlayerOnlySubcommand {
     private final TriggerManager triggerManager;
+
     public TriggerBypassSubcommand(TriggerManager triggerManager) {
         super("bypass", true);
         this.triggerManager = triggerManager;

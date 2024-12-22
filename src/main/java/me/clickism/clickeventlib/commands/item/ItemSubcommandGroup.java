@@ -1,7 +1,7 @@
 package me.clickism.clickeventlib.commands.item;
 
-import me.clickism.subcommandapi.command.SubcommandGroup;
 import me.clickism.clickeventlib.item.CustomItemManager;
+import me.clickism.subcommandapi.command.SubcommandGroup;
 
 /**
  * Subcommand group for item-related commands.

@@ -67,9 +67,9 @@ public class TriggerBoxSelectorItem extends CustomItem {
      */
     private void selectPosition(Player player, Location location, Action action) {
         TriggerBox box = switch (action) {
-            case LEFT_CLICK_BLOCK -> selectionManager.selectPosAndBuild(player, location, 
+            case LEFT_CLICK_BLOCK -> selectionManager.selectPosAndBuild(player, location,
                     TriggerSelectionManager.PosType.POS1, triggerManager);
-            case RIGHT_CLICK_BLOCK -> selectionManager.selectPosAndBuild(player, location, 
+            case RIGHT_CLICK_BLOCK -> selectionManager.selectPosAndBuild(player, location,
                     TriggerSelectionManager.PosType.POS2, triggerManager);
             default -> null;
         };

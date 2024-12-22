@@ -9,6 +9,7 @@ import org.bukkit.World;
 import org.bukkit.WorldCreator;
 import org.bukkit.WorldType;
 import org.bukkit.command.CommandSender;
+
 import java.io.IOException;
 
 class WorldGenerateSubcommand extends Subcommand {
@@ -19,7 +20,7 @@ class WorldGenerateSubcommand extends Subcommand {
     private static final EnumArgument<World.Environment> ENVIRONMENT_ARGUMENT =
             new EnumArgument<>("environment", false, World.Environment.class);
     private static final LongArgument SEED_ARGUMENT = new LongArgument("seed", false);
-    
+
     private final WorldManager worldManager;
 
     public WorldGenerateSubcommand(WorldManager worldManager) {
@@ -48,8 +49,8 @@ class WorldGenerateSubcommand extends Subcommand {
         } catch (IllegalArgumentException | IOException e) {
             throw new CommandException(e);
         }
-        return CommandResult.success("Generated world &f&l" + name.toLowerCase() + "&a with type &l" + 
-                                     type.toString().toLowerCase() + "&a and environment &l" + environment.toString().toLowerCase() + 
+        return CommandResult.success("Generated world &f&l" + name.toLowerCase() + "&a with type &l" +
+                                     type.toString().toLowerCase() + "&a and environment &l" + environment.toString().toLowerCase() +
                                      "&a and seed &l" + (seed == null ? "random" : seed) + "&a.");
     }
 }
