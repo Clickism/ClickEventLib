@@ -2,6 +2,7 @@ package me.clickism.clickeventlib.trigger;
 
 import me.clickism.subcommandapi.util.Named;
 import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.util.BlockVector;
 import org.jetbrains.annotations.NotNull;
@@ -108,6 +109,10 @@ public class TriggerBox implements Named {
      * @return true if inside, false otherwise
      */
     public boolean isInside(Location location) {
+        World world = location.getWorld();
+        if (world == null || !worldName.equals(world.getName())) {
+            return false;
+        }
         double x = location.getX();
         double y = location.getY();
         double z = location.getZ();
