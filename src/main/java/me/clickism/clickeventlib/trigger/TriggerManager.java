@@ -431,11 +431,18 @@ public class TriggerManager implements Listener {
             MessageType.WARN.sendActionbarSilently(player, "You have &nbypass mode&e enabled. Do &6&l/... trigger bypass &eto disable.");
             return;
         }
+        if (!isButton(block)) {
+            event.setCancelled(true);
+        }
         trigger.onEnter(player, null);
+    }
+    
+    private boolean isButton(Block block) {
+        return Tag.BUTTONS.isTagged(block.getType());
     }
 
     private boolean isButtonAndPowered(Block block) {
-        if (!Tag.BUTTONS.isTagged(block.getType())) return false;
+        if (!isButton(block)) return false;
         Directional directional = (Directional) block.getBlockData();
         return block.getRelative(directional.getFacing()).isBlockIndirectlyPowered();
     }
