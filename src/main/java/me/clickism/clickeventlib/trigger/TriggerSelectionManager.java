@@ -135,7 +135,7 @@ public class TriggerSelectionManager {
             throw new IllegalStateException("Player isn't selecting an interaction");
         }
         Trigger trigger = interactionMap.get(player);
-        triggerManager.registerTriggerInteraction(new SafeLocation(location), trigger);
+        triggerManager.registerTriggerInteraction(SafeLocation.of(location), trigger);
         stopSelecting(player);
     }
 }

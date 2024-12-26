@@ -25,7 +25,7 @@ public class DebugPropertyRegistration {
      * @param <T>           the type of the debug property
      * @return the registered debug property
      */
-    public static <T> Property<T> register(Property<T> debugProperty) {
+    public static <T extends Property<?>> T register(T debugProperty) {
         debugProperties.add(debugProperty);
         return debugProperty;
     }

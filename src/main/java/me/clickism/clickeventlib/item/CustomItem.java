@@ -236,6 +236,28 @@ public class CustomItem implements Named {
     }
 
     /**
+     * Hides potion effects of the item.
+     *
+     * @return this item
+     */
+    public CustomItem hidePotionEffects() {
+        applyToMeta(meta -> meta.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS));
+        return this;
+    }
+
+    /**
+     * Hides all attributes of the item.
+     *
+     * @return this item
+     */
+    public CustomItem hideAllAttributes() {
+        applyToMeta(meta -> meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_POTION_EFFECTS,
+                ItemFlag.HIDE_ARMOR_TRIM, ItemFlag.HIDE_PLACED_ON, ItemFlag.HIDE_DESTROYS, ItemFlag.HIDE_DYE,
+                ItemFlag.HIDE_UNBREAKABLE));
+        return this;
+    }
+
+    /**
      * Makes the item unbreakable.
      *
      * @return this item

@@ -13,7 +13,10 @@ import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Manages worlds.
@@ -21,7 +24,7 @@ import java.util.*;
 public class WorldManager implements Listener {
     private final JSONDataManager dataManager;
     private final Map<String, World> worldMap = new HashMap<>();
-    private final List<String> alwaysLoadedWorlds = new ArrayList<>();
+    private final Set<String> alwaysLoadedWorlds = new HashSet<>();
 
     private final JavaPlugin plugin;
 
@@ -50,6 +53,19 @@ public class WorldManager implements Listener {
      */
     public Set<String> getWorldNames() {
         return worldMap.keySet();
+    }
+
+    /**
+     * Forgets the world with the given name.
+     *
+     * @param name key of the world
+     * @return if the world was successfully forgotten, false if it doesn't exist
+     */
+    public boolean forgetWorld(String name) {
+        boolean removed = worldMap.containsKey(name);
+        worldMap.remove(name);
+        save();
+        return removed;
     }
 
     /**

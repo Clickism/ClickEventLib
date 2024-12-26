@@ -1,9 +1,9 @@
 package me.clickism.clickeventlib.leaderboard;
 
 import me.clickism.clickeventlib.location.SafeLocation;
+import me.clickism.clickeventlib.statistic.UUIDManager;
 import me.clickism.clickeventlib.util.DisplayHandler;
 import me.clickism.subcommandapi.util.Named;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Display;
@@ -147,7 +147,10 @@ public class Leaderboard extends DisplayHandler implements Named {
         int size = Math.min(entries.size(), entryCount);
         entries.subList(0, size).forEach(entry -> {
             UUID uuid = entry.getKey();
-            String name = Bukkit.getOfflinePlayer(uuid).getName();
+            String name = UUIDManager.getName(uuid);
+            if (name == null) {
+                name = "Unknown";
+            }
             String value = entry.getValue();
             sb.append("\n").append(color).append(name).append(": ").append(ChatColor.WHITE).append(value);
         });

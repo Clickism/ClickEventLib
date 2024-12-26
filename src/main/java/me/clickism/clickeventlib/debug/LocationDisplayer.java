@@ -81,6 +81,7 @@ public class LocationDisplayer extends DisplayHandler {
 
     private void addDisplay(Entity entity) {
         displays.add(entity);
+        entity.setPersistent(false);
         GLOBAL_DISPLAYS.add(entity);
     }
 

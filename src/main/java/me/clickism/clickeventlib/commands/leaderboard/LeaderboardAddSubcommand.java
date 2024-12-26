@@ -51,7 +51,7 @@ class LeaderboardAddSubcommand extends PlayerOnlySubcommand {
         int pitch = argHandler.getOrDefault(PITCH_ARGUMENT, 0);
         location.setYaw(yaw);
         location.setPitch(pitch);
-        Leaderboard leaderboard = new Leaderboard(id, new SafeLocation(location), provider, title, color,
+        Leaderboard leaderboard = new Leaderboard(id, SafeLocation.of(location), provider, title, color,
                 entryCount, (float) scale);
         leaderboardManager.addLeaderboard(leaderboard);
         leaderboard.update();

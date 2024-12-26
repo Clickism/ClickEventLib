@@ -40,16 +40,6 @@ public final class SafeLocation {
     }
 
     /**
-     * Creates a new safe location from the given location.
-     * The world of this location must not be null.
-     *
-     * @param location the location
-     */
-    public SafeLocation(@NotNull Location location) {
-        this(Objects.requireNonNull(location.getWorld()).getName(), location);
-    }
-
-    /**
      * Creates a new safe location from the given world name and location.
      *
      * @param worldName the name of the world
@@ -153,5 +143,20 @@ public final class SafeLocation {
     @Override
     public int hashCode() {
         return Objects.hash(worldName, x, y, z, yaw, pitch);
+    }
+
+    /**
+     * Creates a new safe location from the given location.
+     *
+     * @param location the location
+     * @return the safe location
+     * @throws IllegalArgumentException if the world of the location is null
+     */
+    public static SafeLocation of(Location location) {
+        World world = location.getWorld();
+        if (world == null) {
+            throw new IllegalArgumentException("Location world is null");
+        }
+        return new SafeLocation(world.getName(), location);
     }
 }

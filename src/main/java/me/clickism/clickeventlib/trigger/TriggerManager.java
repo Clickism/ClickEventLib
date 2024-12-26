@@ -448,7 +448,7 @@ public class TriggerManager implements Listener {
     }
 
     private Trigger getTriggerInteractionAtLocation(Location location) {
-        SafeLocation safeLocation = new SafeLocation(location);
+        SafeLocation safeLocation = SafeLocation.of(location);
         return triggerInteractionMap.get(safeLocation);
     }
 
@@ -470,7 +470,7 @@ public class TriggerManager implements Listener {
                     "&lShift + break &cto remove this interaction first.");
             return;
         }
-        SafeLocation safeLocation = new SafeLocation(location);
+        SafeLocation safeLocation = SafeLocation.of(location);
         unregisterTriggerInteraction(safeLocation);
         MessageType.WARN.send(player, "Removed trigger interaction: &l" + triggerName);
     }

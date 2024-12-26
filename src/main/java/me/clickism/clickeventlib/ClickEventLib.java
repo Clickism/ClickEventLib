@@ -24,6 +24,7 @@ import me.clickism.clickeventlib.phase.PhaseManager;
 import me.clickism.clickeventlib.serialization.AutoSaver;
 import me.clickism.clickeventlib.statistic.StatisticManager;
 import me.clickism.clickeventlib.statistic.Statistics;
+import me.clickism.clickeventlib.statistic.UUIDManager;
 import me.clickism.clickeventlib.team.EventTeam;
 import me.clickism.clickeventlib.team.Role;
 import me.clickism.clickeventlib.team.RoleManager;
@@ -37,6 +38,11 @@ import org.bukkit.plugin.java.JavaPlugin;
  * ClickEventLib class.
  */
 public final class ClickEventLib extends JavaPlugin {
+    /**
+     * Singleton instance of the plugin.
+     */
+    public static ClickEventLib INSTANCE;
+    
     /**
      * ClickEventLib constructor.
      */
@@ -76,6 +82,7 @@ public final class ClickEventLib extends JavaPlugin {
             this.roleManager = new RoleManager(this, "roles.json");
             this.teamManager = new TeamManager(this);
             this.chatManager = new ChatManager(this, roleManager, teamManager);
+            UUIDManager.createInstance(this, autoSaver);
         } catch (Exception exception) {
             getLogger().severe("Failed to load data: " + exception.getMessage());
             getServer().getPluginManager().disablePlugin(this);
@@ -87,6 +94,7 @@ public final class ClickEventLib extends JavaPlugin {
         EventTeam.registerTeams(teamManager);
         Statistics.registerStatistics(statisticManager, leaderboardManager);
         getLogger().info("ClickEventLib activated.");
+        INSTANCE = this;
     }
 
     @Override

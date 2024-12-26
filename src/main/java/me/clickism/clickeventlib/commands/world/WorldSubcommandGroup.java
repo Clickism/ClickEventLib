@@ -17,5 +17,6 @@ public class WorldSubcommandGroup extends SubcommandGroup {
         addSubcommand(new WorldGenerateSubcommand(worldManager));
         addSubcommand(new WorldTeleportSubcommand(worldManager));
         addSubcommand(new WorldImportSubcommand(worldManager));
+        addSubcommand(new WorldForgetSubcommand(worldManager));
     }
 }

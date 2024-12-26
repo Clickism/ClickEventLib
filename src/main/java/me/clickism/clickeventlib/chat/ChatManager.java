@@ -11,6 +11,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.SignChangeEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -105,6 +106,16 @@ public class ChatManager implements Listener {
         // ChatColor color = teamManager.getColorOf(player, GRAY);
         String message = String.format(QUIT_FORMAT, playerName);
         event.setQuitMessage(message);
+    }
+
+    @EventHandler
+    private void onSignEdit(SignChangeEvent event) {
+        Player player = event.getPlayer();
+        if (!player.isOp()) return;
+        String[] lines = event.getLines();
+        for (int i = 0; i < lines.length; i++) {
+            event.setLine(i, Utils.colorize(lines[i]));
+        }
     }
 
     /**

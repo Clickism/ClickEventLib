@@ -11,8 +11,10 @@ import org.jetbrains.annotations.Nullable;
  */
 public class EventMenuBackground implements MenuBackground {
     private static final Button DARK_BUTTON = Button.withIcon(Material.BLACK_STAINED_GLASS_PANE)
+            .setName("&8x")
             .setOnClick((player, view, slot) -> MessageType.FAIL.playSound(player));
     private static final Button LIGHT_BUTTON = Button.withIcon(Material.GRAY_STAINED_GLASS_PANE)
+            .setName("&8x")
             .setOnClick((player, view, slot) -> MessageType.FAIL.playSound(player));
 
     /**
