@@ -211,7 +211,7 @@ public class TeamManager implements Listener {
      */
     public boolean isInvited(Player player, EventTeam eventTeam) {
         if (getEntries(eventTeam).isEmpty()) return true;
-        return inviteMap.get(player.getUniqueId()).contains(eventTeam);
+        return inviteMap.getOrDefault(player.getUniqueId(), Set.of()).contains(eventTeam);
     }
 
     /**
