@@ -120,7 +120,7 @@ public final class ClickEventLib extends JavaPlugin {
         commandManager.registerCommand(new ChatSubcommandGroup(chatManager));
         commandManager.registerCommand(new JoinSubcommand(teamManager, chatManager, false));
         commandManager.registerCommand(new LeaveSubcommand(teamManager, chatManager, false));
-        commandManager.registerCommand(new InviteSubcommand(teamManager, true));
+        commandManager.registerCommand(new InviteSubcommand(teamManager, false));
     }
 
     /**
