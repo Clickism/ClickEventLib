@@ -51,6 +51,7 @@ public class LeaveSubcommand extends Subcommand {
         }
         if (!sender.isOp()) return CommandResult.warning("You can't use this command");
         players.forEach(player -> {
+            if (player.getName() == null) return;
             teamManager.leaveTeam(player);
             chatManager.refreshName(player);
         });

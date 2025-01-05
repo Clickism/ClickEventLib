@@ -136,6 +136,7 @@ public class TeamManager implements Listener {
      */
     @Nullable
     public EventTeam getTeamOf(String entry) {
+        if (entry == null) return null;
         Scoreboard scoreboard = getMainScoreboard();
         if (scoreboard == null) return null;
         Team team = scoreboard.getEntryTeam(entry);
@@ -172,6 +173,7 @@ public class TeamManager implements Listener {
      * @param eventTeam the team to team
      */
     public void joinTeam(String entry, EventTeam eventTeam) {
+        if (entry == null) return;
         Team scoreboardTeam = getScoreboardTeam(eventTeam);
         if (scoreboardTeam == null) throw new IllegalStateException("Team is not registered on the scoreboard");
         scoreboardTeam.addEntry(entry);
@@ -194,6 +196,7 @@ public class TeamManager implements Listener {
      * @return the team that the entry left, or null if the entry was not on a team
      */
     public EventTeam leaveTeam(String entry) {
+        if (entry == null) return null;
         EventTeam eventTeam = getTeamOf(entry);
         if (eventTeam == null) return null;
         Team scoreboardTeam = getScoreboardTeam(eventTeam);
