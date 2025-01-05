@@ -111,7 +111,7 @@ public class FormatUtils {
         if (days > 0) {
             return String.format("%d:%02d:%02d:%02d", days, hours, minutes, seconds);
         } else if (hours > 0) {
-            return String.format("%d::%02d%02d", hours, minutes, seconds);
+            return String.format("%d:%02d:%02d", hours, minutes, seconds);
         } else if (minutes > 0) {
             return String.format("%d:%02d", minutes, seconds);
         }
