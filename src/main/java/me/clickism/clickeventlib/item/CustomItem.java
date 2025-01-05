@@ -452,11 +452,8 @@ public class CustomItem implements Named {
      * @param other other item
      * @return true if the items are similar
      */
-    public boolean isSimilar(ItemStack other) {
-        ItemMeta otherMeta = other.getItemMeta();
-        if (otherMeta == null) return false;
-        String itemId = otherMeta.getPersistentDataContainer().get(ITEM_ID_KEY, PersistentDataType.STRING);
-        return id.toString().equals(itemId);
+    public boolean isOf(ItemStack other) {
+        return isOf(other, id);
     }
 
     /**
@@ -469,5 +466,19 @@ public class CustomItem implements Named {
         meta.getPersistentDataContainer().set(ITEM_ID_KEY, PersistentDataType.STRING, id.toString());
         item.setItemMeta(meta);
         return item;
+    }
+
+    /**
+     * Check if an item is of a custom item with the given id.
+     *
+     * @param item item to check
+     * @param id   id of the custom item
+     * @return true if the item is of the custom item
+     */
+    public static boolean isOf(ItemStack item, Identifier id) {
+        ItemMeta meta = item.getItemMeta();
+        if (meta == null) return false;
+        String itemId = meta.getPersistentDataContainer().get(ITEM_ID_KEY, PersistentDataType.STRING);
+        return id.toString().equals(itemId);
     }
 }
