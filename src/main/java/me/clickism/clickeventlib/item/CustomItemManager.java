@@ -95,7 +95,7 @@ public class CustomItemManager implements Listener {
         customItem.registerInteraction(player);
         if (customItem.isUseOnInteract()) {
             event.setCancelled(true);
-            Utils.removeItem(player, item, 1);
+            item.setAmount(item.getAmount() - 1);
         }
     }
 
