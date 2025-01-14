@@ -7,6 +7,7 @@ import org.bukkit.entity.*;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
+import java.util.function.Consumer;
 
 /**
  * A utility class for handling display entities.
@@ -120,6 +121,45 @@ public class DisplayHandler {
     protected static UUID spawnDisplayIfNotExists(@Nullable UUID uuid, Location location, EntityType type) throws IllegalArgumentException {
         if (exists(uuid)) return uuid;
         return spawnDisplay(location, type).getUniqueId();
+    }
+
+    /**
+     * Runs a consumer on a text display if it exists.
+     *
+     * @param uuid     the UUID of the text display
+     * @param consumer the consumer to run
+     * @return true if the text display exists, false otherwise
+     */
+    protected static boolean runOnTextDisplay(UUID uuid, Consumer<TextDisplay> consumer) {
+        if (!exists(uuid)) return false;
+        consumer.accept(getTextDisplay(uuid));
+        return true;
+    }
+
+    /**
+     * Runs a consumer on a block display if it exists.
+     *
+     * @param uuid     the UUID of the block display
+     * @param consumer the consumer to run
+     * @return true if the block display exists, false otherwise
+     */
+    protected static boolean runOnBlockDisplay(UUID uuid, Consumer<BlockDisplay> consumer) {
+        if (!exists(uuid)) return false;
+        consumer.accept(getBlockDisplay(uuid));
+        return true;
+    }
+
+    /**
+     * Runs a consumer on an item display if it exists.
+     *
+     * @param uuid     the UUID of the item display
+     * @param consumer the consumer to run
+     * @return true if the item display exists, false otherwise
+     */
+    protected static boolean runOnItemDisplay(UUID uuid, Consumer<ItemDisplay> consumer) {
+        if (!exists(uuid)) return false;
+        consumer.accept(getItemDisplay(uuid));
+        return true;
     }
 
     /**
