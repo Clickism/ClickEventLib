@@ -96,7 +96,7 @@ public class Utils {
      */
     public static boolean isFatal(EntityDamageEvent event) {
         if (!(event.getEntity() instanceof LivingEntity livingEntity)) return false;
-        return event.getFinalDamage() > livingEntity.getHealth();
+        return event.getFinalDamage() >= livingEntity.getHealth();
     }
 
     /**
