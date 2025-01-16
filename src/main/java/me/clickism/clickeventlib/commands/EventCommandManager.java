@@ -21,7 +21,7 @@ public class EventCommandManager extends CommandManager {
     protected void sendMessage(CommandSender sender, CommandResult.CommandResultType resultType, @NotNull String message) {
         switch (resultType) {
             case SUCCESS -> MessageType.CONFIRM.send(sender, message);
-            case FAILURE -> MessageType.FAIL.send(sender, message);
+            case FAILURE, FAILURE_WITH_USAGE -> MessageType.FAIL.send(sender, message);
             case WARNING -> MessageType.WARN.send(sender, message);
         }
     }
