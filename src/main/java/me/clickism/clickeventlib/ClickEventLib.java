@@ -52,7 +52,7 @@ public final class ClickEventLib extends JavaPlugin {
     /**
      * Namespace of the plugin
      */
-    public static final String NAMESPACE = "clickeventlib";
+    public static final String NAMESPACE = "event";
 
     private PhaseManager phaseManager;
     private CustomItemManager customItemManager;
