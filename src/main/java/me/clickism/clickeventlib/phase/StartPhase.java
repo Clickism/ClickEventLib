@@ -1,5 +1,6 @@
 package me.clickism.clickeventlib.phase;
 
+import me.clickism.clickeventlib.ClickEventLib;
 import me.clickism.clickeventlib.location.EventWorld;
 import org.bukkit.entity.Player;
 
@@ -15,7 +16,7 @@ public abstract class StartPhase extends Phase {
      * @param worlds list of event worlds
      */
     public StartPhase(List<EventWorld> worlds) {
-        super("start", 0, worlds);
+        super(ClickEventLib.identifier("start"), 0, worlds);
     }
 
     @Override

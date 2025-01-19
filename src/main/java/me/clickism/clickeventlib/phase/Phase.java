@@ -2,6 +2,7 @@ package me.clickism.clickeventlib.phase;
 
 import me.clickism.clickeventlib.location.EventLocation;
 import me.clickism.clickeventlib.location.EventWorld;
+import me.clickism.clickeventlib.util.Identifier;
 import me.clickism.subcommandapi.util.Named;
 import org.bukkit.entity.Player;
 
@@ -18,7 +19,7 @@ public abstract class Phase implements Named {
      */
     public static final long INFINITE_DURATION = -1;
 
-    private final String name;
+    private final Identifier id;
     private final long seconds;
     private final List<EventWorld> worlds;
     private final PhaseListener listener;
@@ -26,36 +27,36 @@ public abstract class Phase implements Named {
     private final Map<Long, Runnable> actions = new HashMap<>();
 
     /**
-     * Creates a new phase with the given name and infinite duration.
+     * Creates a new phase with the given id and infinite duration.
      *
-     * @param name   name of the phase
+     * @param id     id of the phase
      * @param worlds event worlds that this phase uses
      */
-    public Phase(String name, List<EventWorld> worlds) {
-        this(name, INFINITE_DURATION, worlds);
+    public Phase(Identifier id, List<EventWorld> worlds) {
+        this(id, INFINITE_DURATION, worlds);
     }
 
     /**
-     * Creates a new phase with the given name and duration in seconds.
+     * Creates a new phase with the given id and duration in seconds.
      *
-     * @param name    name of the phase
+     * @param id      id of the phase
      * @param seconds duration of the phase in seconds
      * @param worlds  event worlds that this phase uses
      */
-    public Phase(String name, long seconds, List<EventWorld> worlds) {
-        this(name, seconds, worlds, new PhaseListener() {});
+    public Phase(Identifier id, long seconds, List<EventWorld> worlds) {
+        this(id, seconds, worlds, new PhaseListener() {});
     }
 
     /**
-     * Creates a new phase with the given name, duration in seconds and phase listener.
+     * Creates a new phase with the given id, duration in seconds and phase listener.
      *
-     * @param name     name of the phase
+     * @param id       id of the phase
      * @param seconds  duration of the phase in seconds
      * @param worlds   event worlds that this phase uses
      * @param listener phase listener
      */
-    public Phase(String name, long seconds, List<EventWorld> worlds, PhaseListener listener) {
-        this.name = name;
+    public Phase(Identifier id, long seconds, List<EventWorld> worlds, PhaseListener listener) {
+        this.id = id;
         this.seconds = seconds;
         this.worlds = worlds;
         this.listener = listener;
@@ -161,7 +162,16 @@ public abstract class Phase implements Named {
      */
     @Override
     public String getName() {
-        return name;
+        return id.toString();
+    }
+
+    /**
+     * Gets the identifier of the phase.
+     *
+     * @return phase identifier
+     */
+    public Identifier getId() {
+        return id;
     }
 
     /**
