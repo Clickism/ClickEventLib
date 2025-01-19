@@ -9,13 +9,13 @@ import java.util.List;
 /**
  * Abstract class used for easing the implementation of a start phase.
  */
-public abstract class StartPhase extends Phase {
+public abstract class AbstractStartPhase extends Phase {
     /**
      * Creates a new start phase.
      *
      * @param worlds list of event worlds
      */
-    public StartPhase(List<EventWorld> worlds) {
+    public AbstractStartPhase(List<EventWorld> worlds) {
         super(ClickEventLib.identifier("start"), 0, worlds);
     }
 
