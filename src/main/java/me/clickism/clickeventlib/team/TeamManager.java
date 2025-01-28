@@ -206,6 +206,30 @@ public class TeamManager implements Listener {
     }
 
     /**
+     * Checks if a player is on a team.
+     *
+     * @param player    the player to check
+     * @param eventTeam the team to check
+     * @return true if the player is on the team, false otherwise
+     */
+    public boolean isOnTeam(OfflinePlayer player, EventTeam eventTeam) {
+        return isOnTeam(player.getName(), eventTeam);
+    }
+
+    /**
+     * Checks if an entry is on a team.
+     *
+     * @param entry     the entry to check
+     * @param eventTeam the team to check
+     * @return true if the entry is on the team, false otherwise
+     */
+    public boolean isOnTeam(String entry, EventTeam eventTeam) {
+        if (entry == null) return false;
+        EventTeam team = getTeamOf(entry);
+        return team != null && team.equals(eventTeam);
+    }
+
+    /**
      * Checks if a player is invited to a team.
      *
      * @param player    the player to check
