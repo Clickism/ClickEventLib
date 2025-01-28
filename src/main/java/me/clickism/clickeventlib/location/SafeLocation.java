@@ -133,11 +133,11 @@ public final class SafeLocation {
         if (obj == null || obj.getClass() != this.getClass()) return false;
         SafeLocation that = (SafeLocation) obj;
         return Objects.equals(this.worldName, that.worldName) &&
-               Double.doubleToLongBits(this.x) == Double.doubleToLongBits(that.x) &&
-               Double.doubleToLongBits(this.y) == Double.doubleToLongBits(that.y) &&
-               Double.doubleToLongBits(this.z) == Double.doubleToLongBits(that.z) &&
-               Float.floatToIntBits(this.yaw) == Float.floatToIntBits(that.yaw) &&
-               Float.floatToIntBits(this.pitch) == Float.floatToIntBits(that.pitch);
+                Double.doubleToLongBits(this.x) == Double.doubleToLongBits(that.x) &&
+                Double.doubleToLongBits(this.y) == Double.doubleToLongBits(that.y) &&
+                Double.doubleToLongBits(this.z) == Double.doubleToLongBits(that.z) &&
+                Float.floatToIntBits(this.yaw) == Float.floatToIntBits(that.yaw) &&
+                Float.floatToIntBits(this.pitch) == Float.floatToIntBits(that.pitch);
     }
 
     @Override

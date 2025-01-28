@@ -6,11 +6,13 @@ import me.clickism.subcommandapi.argument.PlayersArgument;
 import me.clickism.subcommandapi.command.*;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+
 import java.util.Collection;
 
 class PlayerSetAddSubcommand extends Subcommand {
     private static final PlayersArgument PLAYERS_ARGUMENT = new PlayersArgument("players", true);
     private final PlayerSet playerSet;
+
     public PlayerSetAddSubcommand(PlayerSet playerSet) {
         super("add", true);
         this.playerSet = playerSet;

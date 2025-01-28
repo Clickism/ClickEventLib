@@ -4,6 +4,7 @@ import me.clickism.clickeventlib.chat.MessageType;
 import me.clickism.clickeventlib.debug.DebugPropertyRegistration;
 import me.clickism.subcommandapi.command.*;
 import org.bukkit.command.CommandSender;
+
 import java.util.stream.Collectors;
 
 class DebugListSubcommand extends Subcommand {
@@ -14,9 +15,9 @@ class DebugListSubcommand extends Subcommand {
     @Override
     protected CommandResult execute(CommandStack trace, CommandSender sender, ArgumentHandler argHandler) throws CommandException {
         MessageType.CONFIRM.send(sender, "Debug properties and values:\n" +
-                                         DebugPropertyRegistration.getDebugProperties().stream()
-                                                 .map(property -> "&a- &l" + property.getName() + "&a: &f" + property.get())
-                                                 .collect(Collectors.joining("\n")));
+                DebugPropertyRegistration.getDebugProperties().stream()
+                        .map(property -> "&a- &l" + property.getName() + "&a: &f" + property.get())
+                        .collect(Collectors.joining("\n")));
         return CommandResult.success();
     }
 }

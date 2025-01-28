@@ -117,8 +117,8 @@ public class TriggerBox implements Named {
         double y = location.getY();
         double z = location.getZ();
         return minX <= x && x < maxX &&
-               minY <= y && y < maxY &&
-               minZ <= z && z < maxZ;
+                minY <= y && y < maxY &&
+                minZ <= z && z < maxZ;
     }
 
     /**

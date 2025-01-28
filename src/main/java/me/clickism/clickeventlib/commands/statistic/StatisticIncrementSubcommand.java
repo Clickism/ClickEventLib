@@ -9,6 +9,7 @@ import me.clickism.subcommandapi.argument.StringArgument;
 import me.clickism.subcommandapi.command.*;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
+
 import java.util.Collection;
 
 class StatisticIncrementSubcommand extends Subcommand {
@@ -36,6 +37,6 @@ class StatisticIncrementSubcommand extends Subcommand {
             throw new CommandException(exception.getMessage());
         }
         return CommandResult.success("Incremented statistic &l" + statistic.getName() + "&a by &f&l" + valueString +
-                                     "&a for players: &l" + FormatUtils.formatPlayers(players));
+                "&a for players: &l" + FormatUtils.formatPlayers(players));
     }
 }

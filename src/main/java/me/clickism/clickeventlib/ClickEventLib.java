@@ -42,7 +42,7 @@ public final class ClickEventLib extends JavaPlugin {
      * Singleton instance of the plugin.
      */
     public static ClickEventLib INSTANCE;
-    
+
     /**
      * ClickEventLib constructor.
      */

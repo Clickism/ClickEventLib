@@ -9,6 +9,7 @@ import me.clickism.subcommandapi.argument.SelectionArgument;
 import me.clickism.subcommandapi.command.*;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -45,7 +46,7 @@ class TriggerBoxRemoveRadiusSubcommand extends PlayerOnlySubcommand {
             return CommandResult.failure("No triggers within radius &l" + radius + ".");
         } else {
             return CommandResult.success("Removed " + removed.size() + " triggers within " + radius + " blocks:" +
-                                         FormatUtils.formatTriggerBoxes(removed));
+                    FormatUtils.formatTriggerBoxes(removed));
         }
     }
 

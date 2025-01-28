@@ -6,11 +6,13 @@ import me.clickism.subcommandapi.argument.PlayersArgument;
 import me.clickism.subcommandapi.command.*;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+
 import java.util.Collection;
 
 class PlayerSetRemoveSubcommand extends Subcommand {
     private static final PlayersArgument PLAYERS_ARGUMENT = new PlayersArgument("players", true);
     private final PlayerSet playerSet;
+
     public PlayerSetRemoveSubcommand(PlayerSet playerSet) {
         super("remove", true);
         this.playerSet = playerSet;

@@ -47,8 +47,8 @@ public class InviteSubcommand extends PlayerOnlySubcommand {
                 if (!teamManager.invitePlayer(player, senderTeam)) {
                     yield CommandResult.failure("This player is already invited to your team.");
                 }
-                MessageType.WARN.send(player, "You have been invited to join " + senderTeam.getColor() + "&l" + senderTeam.getName() + 
-                                              "&e by &l" + sender.getName() + "&e. Do &l/join " + senderTeam.getName() + " &eto accept.");
+                MessageType.WARN.send(player, "You have been invited to join " + senderTeam.getColor() + "&l" + senderTeam.getName() +
+                        "&e by &l" + sender.getName() + "&e. Do &l/join " + senderTeam.getName() + " &eto accept.");
                 yield CommandResult.success("Invited &l" + player.getName() + " &ato your team.");
             }
             case OPERATOR -> {

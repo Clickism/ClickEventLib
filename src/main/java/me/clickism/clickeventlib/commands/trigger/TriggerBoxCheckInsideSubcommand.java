@@ -5,6 +5,7 @@ import me.clickism.clickeventlib.trigger.TriggerManager;
 import me.clickism.clickeventlib.util.FormatUtils;
 import me.clickism.subcommandapi.command.*;
 import org.bukkit.entity.Player;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -33,7 +34,7 @@ class TriggerBoxCheckInsideSubcommand extends PlayerOnlySubcommand {
             return CommandResult.failure("No triggers at your location.");
         } else {
             return CommandResult.success("You are inside " + inside.size() + " trigger(s):" +
-                                         FormatUtils.formatTriggerBoxes(inside));
+                    FormatUtils.formatTriggerBoxes(inside));
         }
     }
 }

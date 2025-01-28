@@ -20,6 +20,7 @@ import org.jetbrains.annotations.Nullable;
 import java.io.IOException;
 import java.util.*;
 // TODO : TELEPORT TO WORLD SPAWN ON DEATH EVENT PRIORITY
+
 /**
  * Handles the phases of an event and the lobby.
  */

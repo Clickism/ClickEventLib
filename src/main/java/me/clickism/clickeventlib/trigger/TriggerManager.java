@@ -436,7 +436,7 @@ public class TriggerManager implements Listener {
         }
         trigger.onEnter(player, null);
     }
-    
+
     private boolean isButton(Block block) {
         return Tag.BUTTONS.isTagged(block.getType());
     }
@@ -467,7 +467,7 @@ public class TriggerManager implements Listener {
         if (!player.isSneaking()) {
             MessageType.FAIL.send(player,
                     "There is a trigger interaction &l" + triggerName + "&c at this block. " +
-                    "&lShift + break &cto remove this interaction first.");
+                            "&lShift + break &cto remove this interaction first.");
             return;
         }
         SafeLocation safeLocation = SafeLocation.of(location);

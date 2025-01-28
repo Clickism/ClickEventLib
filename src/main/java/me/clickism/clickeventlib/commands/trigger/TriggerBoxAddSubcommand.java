@@ -38,7 +38,7 @@ class TriggerBoxAddSubcommand extends PlayerOnlySubcommand {
         String triggerName = trigger.getName();
         return CommandResult.success(
                 "Selecting trigger &l" + triggerName + ":\n" +
-                "&aUse the " + itemName + "&a to create a trigger."
+                        "&aUse the " + itemName + "&a to create a trigger."
         );
     }
 }

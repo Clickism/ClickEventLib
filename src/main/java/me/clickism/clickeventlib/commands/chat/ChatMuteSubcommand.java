@@ -44,12 +44,12 @@ class ChatMuteSubcommand extends Subcommand {
     private CommandResult mute(Collection<Player> players, ChatManager.ChatType chatType) {
         players.forEach(player -> chatManager.mute(player, chatType));
         return CommandResult.success("&lMuted &a" + chatType.name().toLowerCase() + " chat for players: &l" +
-                                     FormatUtils.formatPlayers(players));
+                FormatUtils.formatPlayers(players));
     }
 
     private CommandResult unmute(Collection<Player> players, ChatManager.ChatType chatType) {
         players.forEach(player -> chatManager.unmute(player, chatType));
         return CommandResult.success("&lUnmuted &a" + chatType.name().toLowerCase() + " chat for players: &l" +
-                                     FormatUtils.formatPlayers(players));
+                FormatUtils.formatPlayers(players));
     }
 }

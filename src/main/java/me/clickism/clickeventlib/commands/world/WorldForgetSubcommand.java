@@ -10,7 +10,7 @@ import org.bukkit.command.CommandSender;
 class WorldForgetSubcommand extends Subcommand {
     private final SelectionArgument<Named> worldNameArgument;
     private final WorldManager worldManager;
-    
+
     public WorldForgetSubcommand(WorldManager worldManager) {
         super("forget", true);
         this.worldNameArgument = new SelectionArgument<>("world", true, () -> NamedCollection.of(worldManager.getWorldNames()));

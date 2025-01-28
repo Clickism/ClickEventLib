@@ -8,6 +8,7 @@ import me.clickism.subcommandapi.argument.SelectionArgument;
 import me.clickism.subcommandapi.command.*;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
+
 import java.util.Collection;
 
 class StatisticResetSubcommand extends Subcommand {

@@ -50,7 +50,7 @@ class WorldGenerateSubcommand extends Subcommand {
             throw new CommandException(e);
         }
         return CommandResult.success("Generated world &f&l" + name.toLowerCase() + "&a with type &l" +
-                                     type.toString().toLowerCase() + "&a and environment &l" + environment.toString().toLowerCase() +
-                                     "&a and seed &l" + (seed == null ? "random" : seed) + "&a.");
+                type.toString().toLowerCase() + "&a and environment &l" + environment.toString().toLowerCase() +
+                "&a and seed &l" + (seed == null ? "random" : seed) + "&a.");
     }
 }

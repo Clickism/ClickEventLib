@@ -7,6 +7,7 @@ import me.clickism.subcommandapi.argument.SelectionArgument;
 import me.clickism.subcommandapi.argument.TimeArgument;
 import me.clickism.subcommandapi.command.*;
 import org.bukkit.command.CommandSender;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -36,9 +37,9 @@ class PhaseSetSubcommand extends Subcommand {
         List<EventLocation> unsetLocations = phase.getRequiredEventLocations().stream().filter(l -> !l.isLocationSet()).toList();
         if (!unsetLocations.isEmpty() && !argHandler.hasFlag(FORCE_FLAG)) {
             return CommandResult.failure("Not all required event locations are set. Use &l--force &cto force the phase change: &l" +
-                                         unsetLocations.stream()
-                                                 .map(EventLocation::getName)
-                                                 .collect(Collectors.joining(", ")));
+                    unsetLocations.stream()
+                            .map(EventLocation::getName)
+                            .collect(Collectors.joining(", ")));
         }
         if (argHandler.hasFlag(RAW_FLAG)) {
             phaseManager.setPhase(phase);
