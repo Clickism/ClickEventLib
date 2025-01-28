@@ -80,8 +80,8 @@ public final class ClickEventLib extends JavaPlugin {
             this.statisticManager = new StatisticManager(this, autoSaver, 30, "statistics.json");
             this.leaderboardManager = new LeaderboardManager(this, autoSaver, 30, "leaderboards.json");
             this.roleManager = new RoleManager(this, "roles.json");
-            this.teamManager = new TeamManager(this);
-            this.chatManager = new ChatManager(this, roleManager, teamManager);
+            this.getServer().getPluginManager().registerEvents(TeamManager.INSTANCE, this);
+            this.chatManager = new ChatManager(this, roleManager);
             UUIDManager.createInstance(this, autoSaver);
         } catch (Exception exception) {
             getLogger().severe("Failed to load data: " + exception.getMessage());
@@ -175,15 +175,6 @@ public final class ClickEventLib extends JavaPlugin {
      */
     public RoleManager getRoleManager() {
         return roleManager;
-    }
-
-    /**
-     * Gets the main trigger manager.
-     *
-     * @return the trigger manager
-     */
-    public TeamManager getTeamManager() {
-        return teamManager;
     }
 
     /**
