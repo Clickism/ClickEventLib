@@ -476,6 +476,7 @@ public class CustomItem implements Named {
      * @return true if the item is of the custom item
      */
     public static boolean isOf(ItemStack item, Identifier id) {
+        if (item == null) return false;
         ItemMeta meta = item.getItemMeta();
         if (meta == null) return false;
         String itemId = meta.getPersistentDataContainer().get(ITEM_ID_KEY, PersistentDataType.STRING);
