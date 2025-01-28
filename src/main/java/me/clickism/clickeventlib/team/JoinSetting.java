@@ -5,10 +5,6 @@ package me.clickism.clickeventlib.team;
  */
 public enum JoinSetting {
     /**
-     * Use the default setting of the team manager.
-     */
-    USE_DEFAULT,
-    /**
      * Everyone can team any team freely.
      */
     EVERYONE_OPEN,
