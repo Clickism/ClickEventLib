@@ -1,7 +1,7 @@
 package me.clickism.clickeventlib.team;
 
-import me.clickism.clickeventlib.annotations.AutoRegistered;
-import me.clickism.clickeventlib.annotations.RegistryType;
+import me.clickism.clickeventlib.ClickEventLib;
+import me.clickism.clickeventlib.chat.ChatManager;
 import me.clickism.subcommandapi.util.NamedCollection;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -10,7 +10,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.world.WorldLoadEvent;
-import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.ScoreboardManager;
 import org.bukkit.scoreboard.Team;
@@ -22,6 +21,10 @@ import java.util.*;
  * Manages teams for events.
  */
 public class TeamManager implements Listener {
+    /**
+     * The instance of the team manager.
+     */
+    public static final TeamManager INSTANCE = new TeamManager();
 
     private JoinSetting defaultJoinSetting = JoinSetting.EVERYONE_OPEN;
     private boolean defaultAllowFriendlyFire = false;
@@ -31,12 +34,8 @@ public class TeamManager implements Listener {
 
     /**
      * Creates a new team manager.
-     *
-     * @param plugin the plugin to register events with
      */
-    @AutoRegistered(type = RegistryType.EVENT)
-    public TeamManager(JavaPlugin plugin) {
-        plugin.getServer().getPluginManager().registerEvents(this, plugin);
+    protected TeamManager() {
     }
 
     /**
@@ -44,41 +43,9 @@ public class TeamManager implements Listener {
      *
      * @param eventTeam the team to register
      */
-    public void registerTeam(EventTeam eventTeam) {
+    void registerTeam(EventTeam eventTeam) {
         teams.addIfAbsent(eventTeam);
         tryRegisterTeamOnScoreboard(eventTeam);
-    }
-
-    /**
-     * Registers multiple teams.
-     *
-     * @param eventTeams the teams to register
-     */
-    public void registerTeams(EventTeam... eventTeams) {
-        for (EventTeam eventTeam : eventTeams) {
-            registerTeam(eventTeam);
-        }
-    }
-
-    /**
-     * Registers a team if it is not already registered.
-     *
-     * @param eventTeam the team to register
-     */
-    public void registerTeamIfAbsent(EventTeam eventTeam) {
-        if (!teams.contains(eventTeam)) {
-            registerTeam(eventTeam);
-        }
-    }
-
-    /**
-     * Checks if a team is registered.
-     *
-     * @param eventTeam the team to check
-     * @return true if the team is registered, false otherwise
-     */
-    public boolean isRegistered(EventTeam eventTeam) {
-        return teams.contains(eventTeam);
     }
 
     /**
@@ -95,7 +62,7 @@ public class TeamManager implements Listener {
             team = scoreboard.registerNewTeam(eventTeam.getName());
         }
         team.setColor(eventTeam.getColor());
-        team.setAllowFriendlyFire(eventTeam.isFriendlyFireAllowed(defaultAllowFriendlyFire));
+        team.setAllowFriendlyFire(eventTeam.isFriendlyFireAllowed());
         team.setOption(Team.Option.COLLISION_RULE, Team.OptionStatus.NEVER);
     }
 
@@ -164,6 +131,7 @@ public class TeamManager implements Listener {
      */
     public void joinTeam(OfflinePlayer player, EventTeam eventTeam) {
         joinTeam(player.getName(), eventTeam);
+        refreshName(player);
     }
 
     /**
@@ -186,7 +154,9 @@ public class TeamManager implements Listener {
      * @return the team that the player left, or null if the player was not on a team
      */
     public EventTeam leaveTeam(OfflinePlayer player) {
-        return leaveTeam(player.getName());
+        EventTeam team = leaveTeam(player.getName());
+        refreshName(player);
+        return team;
     }
 
     /**
@@ -203,6 +173,13 @@ public class TeamManager implements Listener {
         if (scoreboardTeam == null) throw new IllegalStateException("Team is not registered on the scoreboard");
         scoreboardTeam.removeEntry(entry);
         return eventTeam;
+    }
+
+    private void refreshName(OfflinePlayer player) {
+        ChatManager chatManager = ClickEventLib.INSTANCE.getChatManager();
+        if (chatManager != null) {
+            chatManager.refreshName(player);
+        }
     }
 
     /**
@@ -262,7 +239,7 @@ public class TeamManager implements Listener {
      * @return true if this team can be invited to, false otherwise
      */
     public boolean isInvitable(EventTeam eventTeam) {
-        return eventTeam.getJoinSetting(defaultJoinSetting) == JoinSetting.EVERYONE_INVITE;
+        return eventTeam.getJoinSetting() == JoinSetting.EVERYONE_INVITE;
     }
 
     /**
