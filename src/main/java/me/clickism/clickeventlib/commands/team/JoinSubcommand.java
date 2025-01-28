@@ -57,7 +57,7 @@ public class JoinSubcommand extends Subcommand {
         if (!(sender instanceof Player player)) {
             return CommandResult.failure("You must be a player to add yourself to a team.");
         }
-        return switch (team.getJoinSetting(teamManager.getDefaultJoinSetting())) {
+        return switch (team.getJoinSetting()) {
             case EVERYONE_OPEN -> {
                 teamManager.joinTeam(player, team);
                 chatManager.refreshName(player);
@@ -79,7 +79,6 @@ public class JoinSubcommand extends Subcommand {
                 chatManager.refreshName(player);
                 yield CommandResult.success("Joined team &l" + team.getName() + "&a.");
             }
-            case USE_DEFAULT -> throw new IllegalStateException("Unexpected USE_DEFAULT join setting.");
         };
     }
 }

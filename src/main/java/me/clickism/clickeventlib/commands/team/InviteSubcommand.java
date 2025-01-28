@@ -41,7 +41,7 @@ public class InviteSubcommand extends PlayerOnlySubcommand {
         if (senderTeam.equals(teamManager.getTeamOf(player))) {
             return CommandResult.failure("This player is already in your team.");
         }
-        return switch (senderTeam.getJoinSetting(teamManager.getDefaultJoinSetting())) {
+        return switch (senderTeam.getJoinSetting()) {
             case EVERYONE_OPEN -> CommandResult.warning("This team is open to everyone.");
             case EVERYONE_INVITE -> {
                 if (!teamManager.invitePlayer(player, senderTeam)) {
@@ -57,7 +57,6 @@ public class InviteSubcommand extends PlayerOnlySubcommand {
                 }
                 yield CommandResult.failure("You can't invite players to this team. Use &4&l/join <team> <players> &cto add players.");
             }
-            case USE_DEFAULT -> throw new IllegalStateException("Unexpected USE_DEFAULT join setting.");
         };
     }
 }
