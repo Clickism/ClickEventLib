@@ -53,20 +53,17 @@ public class ChatManager implements Listener {
     private final JavaPlugin plugin;
 
     private final RoleManager roleManager;
-    private final TeamManager teamManager;
 
     /**
      * Create a new chat manager with the given plugin.
      *
      * @param plugin      the plugin to create the chat manager for
      * @param roleManager the role manager
-     * @param teamManager the team manager
      */
     @AutoRegistered(type = RegistryType.EVENT)
-    public ChatManager(JavaPlugin plugin, RoleManager roleManager, TeamManager teamManager) {
+    public ChatManager(JavaPlugin plugin, RoleManager roleManager) {
         this.plugin = plugin;
         this.roleManager = roleManager;
-        this.teamManager = teamManager;
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }
 
@@ -82,7 +79,7 @@ public class ChatManager implements Listener {
         if (player.isOp()) {
             message = Utils.colorize(message);
         }
-        String teamPrefix = teamManager.getPrefix(player);
+        String teamPrefix = TeamManager.INSTANCE.getPrefix(player);
         String rolePrefix = roleManager.getPrefix(player.getUniqueId());
         String playerName = player.getName();
         String formattedMessage = String.format(CHAT_FORMAT, teamPrefix, rolePrefix, playerName, message);
@@ -136,7 +133,7 @@ public class ChatManager implements Listener {
      */
     public void refreshName(Player player) {
         UUID uuid = player.getUniqueId();
-        String teamPrefix = teamManager.getPrefix(player);
+        String teamPrefix = TeamManager.INSTANCE.getPrefix(player);
         String rolePrefix = roleManager.getPrefix(uuid);
         String playerName = player.getName();
         String displayName = String.format(DISPLAY_NAME_FORMAT, teamPrefix, rolePrefix, playerName);
