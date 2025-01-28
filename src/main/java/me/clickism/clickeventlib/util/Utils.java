@@ -8,6 +8,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
+import org.bukkit.attribute.Attribute;
+import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageEvent;
@@ -113,22 +115,28 @@ public class Utils {
 
     /**
      * Resets a player's health, food, and inventory, etc. and sets their game mode to survival.
+     * Will also reset the player's max health to 20.
      *
      * @param player the player to reset
      */
     public static void resetPlayer(Player player) {
-        resetPlayer(player, GameMode.SURVIVAL);
+        resetPlayer(player, GameMode.SURVIVAL, true);
     }
 
     /**
      * Resets a player's health, food, and inventory, etc. and sets their game mode to the given game mode.
      *
-     * @param player   the player to reset
-     * @param gameMode the game mode to set the player to
+     * @param player         the player to reset
+     * @param gameMode       the game mode to set the player to#
+     * @param resetMaxHealth if true, the player's max health will be reset to 20
      */
-    public static void resetPlayer(Player player, GameMode gameMode) {
+    public static void resetPlayer(Player player, GameMode gameMode, boolean resetMaxHealth) {
         Utils.clearInventory(player);
-        player.setHealth(20);
+        AttributeInstance attribute = player.getAttribute(Attribute.GENERIC_MAX_HEALTH);
+        if (attribute != null && resetMaxHealth) {
+            attribute.setBaseValue(20);
+        }
+        player.setHealth(attribute != null ? attribute.getBaseValue() : 20);
         player.setFoodLevel(20);
         player.setSaturation(4);
         player.setFireTicks(0);
