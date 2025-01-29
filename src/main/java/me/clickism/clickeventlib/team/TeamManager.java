@@ -175,6 +175,34 @@ public class TeamManager implements Listener {
         return eventTeam;
     }
 
+    /**
+     * Leaves a player from a specific team.
+     *
+     * @param player the player to leave
+     * @param team   the team to leave
+     * @return true if the player was successfully left, false if the player was not on the team
+     */
+    public boolean leaveTeam(OfflinePlayer player, EventTeam team) {
+        if (player == null) return false;
+        if (!isOnTeam(player, team)) return false;
+        leaveTeam(player);
+        return true;
+    }
+
+    /**
+     * Leaves an entry from a specific team.
+     *
+     * @param entry the entry to leave
+     * @param team  the team to leave
+     * @return true if the entry was successfully left, false if the entry was not on the team
+     */
+    public boolean leaveTeam(String entry, EventTeam team) {
+        if (entry == null) return false;
+        if (!isOnTeam(entry, team)) return false;
+        leaveTeam(entry);
+        return true;
+    }
+
     private void refreshName(OfflinePlayer player) {
         ChatManager chatManager = ClickEventLib.INSTANCE.getChatManager();
         if (chatManager != null) {
