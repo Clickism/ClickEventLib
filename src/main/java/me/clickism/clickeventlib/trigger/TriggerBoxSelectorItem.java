@@ -39,7 +39,7 @@ public class TriggerBoxSelectorItem extends CustomItem {
      */
     public TriggerBoxSelectorItem(String namespace, TriggerManager triggerManager, TriggerSelectionManager selectionManager) {
         super(new Identifier(namespace, ITEM_ID), DISPLAY_NAME, Material.GOLDEN_AXE);
-        addLore(LORE);
+        setLore(LORE);
         addEnchantmentGlint();
         hideAttributes();
         setAllowedActions(ALLOWED_ACTIONS);

@@ -4,6 +4,7 @@ import me.clickism.clickeventlib.ClickEventLib;
 import me.clickism.clickeventlib.annotations.Colorized;
 import me.clickism.clickeventlib.util.Identifier;
 import me.clickism.clickeventlib.util.Utils;
+import me.clickism.clickgui.menu.Icon;
 import me.clickism.subcommandapi.util.Named;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -73,7 +74,7 @@ public class CustomItem implements Named {
      */
     public CustomItem(Identifier id, String displayName, Material material) {
         this(id, material);
-        setDisplayName(displayName);
+        setName(displayName);
     }
 
     /**
@@ -137,9 +138,8 @@ public class CustomItem implements Named {
      * @param name display name
      * @return this item
      */
-    public CustomItem setDisplayName(@Colorized String name) {
-        applyToMeta(meta -> meta.setDisplayName(Utils.colorize(name)));
-        return this;
+    public CustomItem setName(@Colorized String name) {
+        return applyToMeta(meta -> meta.setDisplayName(Utils.colorize(name)));
     }
 
     /**
@@ -160,8 +160,7 @@ public class CustomItem implements Named {
      * @return this item
      */
     public CustomItem addEnchant(Enchantment enchantment, int level) {
-        applyToMeta(meta -> meta.addEnchant(enchantment, level, true));
-        return this;
+        return applyToMeta(meta -> meta.addEnchant(enchantment, level, true));
     }
 
     /**
@@ -171,8 +170,7 @@ public class CustomItem implements Named {
      * @return this item
      */
     public CustomItem setModelData(int modelData) {
-        applyToMeta(meta -> meta.setCustomModelData(modelData));
-        return this;
+        return applyToMeta(meta -> meta.setCustomModelData(modelData));
     }
 
     /**
@@ -181,11 +179,10 @@ public class CustomItem implements Named {
      * @return this item
      */
     public CustomItem addEnchantmentGlint() {
-        applyToMeta(meta -> {
+        return applyToMeta(meta -> {
             meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
             meta.addEnchant(Enchantment.DURABILITY, 1, true);
         });
-        return this;
     }
 
     /**
@@ -194,12 +191,12 @@ public class CustomItem implements Named {
      * @param lore lore lines
      * @return this item
      */
-    public CustomItem addLore(String... lore) {
+    public CustomItem setLore(String... lore) {
         List<String> list = new ArrayList<>(lore.length);
         for (String line : lore) {
             list.add(Utils.colorize(line));
         }
-        return addLore(list);
+        return setLore(list);
     }
 
     /**
@@ -208,11 +205,27 @@ public class CustomItem implements Named {
      * @param lore lore
      * @return this item
      */
-    public CustomItem addLore(List<String> lore) {
-        applyToMeta(meta -> meta.setLore(lore.stream()
+    public CustomItem setLore(List<String> lore) {
+        return applyToMeta(meta -> meta.setLore(lore.stream()
                 .map(Utils::colorize)
                 .toList()));
-        return this;
+    }
+
+    /**
+     * Adds a line to the lore of this icon.
+     *
+     * @param line the line
+     * @return this icon
+     */
+    public CustomItem addLoreLine(@Colorized String line) {
+        return applyToMeta(meta -> {
+            List<String> lore = meta.getLore();
+            if (lore == null) {
+                lore = new ArrayList<>();
+            }
+            lore.add(Utils.colorize(line));
+            meta.setLore(lore);
+        });
     }
 
     /**
@@ -231,8 +244,7 @@ public class CustomItem implements Named {
      * @return this item
      */
     public CustomItem hideAttributes() {
-        applyToMeta(meta -> meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES));
-        return this;
+        return applyToMeta(meta -> meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES));
     }
 
     /**
@@ -241,8 +253,7 @@ public class CustomItem implements Named {
      * @return this item
      */
     public CustomItem hidePotionEffects() {
-        applyToMeta(meta -> meta.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS));
-        return this;
+        return applyToMeta(meta -> meta.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS));
     }
 
     /**
@@ -251,10 +262,9 @@ public class CustomItem implements Named {
      * @return this item
      */
     public CustomItem hideAllAttributes() {
-        applyToMeta(meta -> meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_POTION_EFFECTS,
+        return applyToMeta(meta -> meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_POTION_EFFECTS,
                 ItemFlag.HIDE_ARMOR_TRIM, ItemFlag.HIDE_PLACED_ON, ItemFlag.HIDE_DESTROYS, ItemFlag.HIDE_DYE,
                 ItemFlag.HIDE_UNBREAKABLE));
-        return this;
     }
 
     /**
@@ -263,8 +273,7 @@ public class CustomItem implements Named {
      * @return this item
      */
     public CustomItem setUnbreakable() {
-        applyToMeta(meta -> meta.setUnbreakable(true));
-        return this;
+        return applyToMeta(meta -> meta.setUnbreakable(true));
     }
 
     /**
@@ -294,11 +303,12 @@ public class CustomItem implements Named {
      *
      * @param consumer consumer to apply
      */
-    public void applyToMeta(Consumer<ItemMeta> consumer) {
+    public CustomItem applyToMeta(Consumer<ItemMeta> consumer) {
         ItemMeta meta = item.getItemMeta();
-        if (meta == null) return;
+        if (meta == null) return this;
         consumer.accept(meta);
         item.setItemMeta(meta);
+        return this;
     }
 
     /**

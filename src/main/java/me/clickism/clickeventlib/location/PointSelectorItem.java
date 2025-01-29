@@ -16,7 +16,7 @@ class PointSelectorItem extends CustomItem {
         super(new Identifier(namespace, pointManager.getPointNamespace() + "_selector"),
                 "&b👈 &lSelect Point: &f&l" + FormatUtils.formatNamespace(pointManager.getPointNamespace()),
                 Material.IRON_AXE);
-        addLore("&7&lRight-click &7on a block to add a point.",
+        setLore("&7&lRight-click &7on a block to add a point.",
                 "&7This will not remove any existing points.",
                 "&7Use &8&l/... remove &7 instead.");
         addEnchantmentGlint();

@@ -12,7 +12,7 @@ class PointAdderItem extends CustomItem {
         super(new Identifier(namespace, pointManager.getPointNamespace() + "_adder"),
                 "&e↓ &lAdd Here: &f&l" + FormatUtils.formatNamespace(pointManager.getPointNamespace()),
                 Material.COMPASS);
-        addLore("&7Click to add a point at your current location.",
+        setLore("&7Click to add a point at your current location.",
                 "&7This will not remove any existing points.",
                 "&7Use &8&l/... remove &7 instead.");
         addEnchantmentGlint();

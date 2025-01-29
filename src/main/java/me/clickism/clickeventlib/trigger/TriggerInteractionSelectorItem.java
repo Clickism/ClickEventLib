@@ -34,7 +34,7 @@ public class TriggerInteractionSelectorItem extends CustomItem {
      */
     public TriggerInteractionSelectorItem(String namespace, TriggerManager triggerManager, TriggerSelectionManager selectionManager) {
         super(new Identifier(namespace, ITEM_ID), DISPLAY_NAME, Material.DIAMOND_AXE);
-        addLore(LORE);
+        setLore(LORE);
         addEnchantmentGlint();
         hideAttributes();
         this.triggerManager = triggerManager;
