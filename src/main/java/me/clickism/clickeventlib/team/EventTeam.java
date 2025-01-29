@@ -102,8 +102,8 @@ public class EventTeam implements Named {
      *
      * @param player the player to join
      */
-    public void joinTeam(OfflinePlayer player) {
-        joinTeam(player.getName());
+    public void join(OfflinePlayer player) {
+        join(player.getName());
     }
 
     /**
@@ -111,7 +111,7 @@ public class EventTeam implements Named {
      *
      * @param entry the entry to join
      */
-    public void joinTeam(String entry) {
+    public void join(String entry) {
         TeamManager.INSTANCE.joinTeam(entry, this);
     }
 
@@ -120,8 +120,8 @@ public class EventTeam implements Named {
      *
      * @param player the player to leave
      */
-    public void leaveTeam(OfflinePlayer player) {
-        leaveTeam(player.getName());
+    public void leave(OfflinePlayer player) {
+        leave(player.getName());
     }
 
     /**
@@ -129,8 +129,8 @@ public class EventTeam implements Named {
      *
      * @param entry the entry to leave
      */
-    public void leaveTeam(String entry) {
-        TeamManager.INSTANCE.leaveTeam(entry);
+    public void leave(String entry) {
+        TeamManager.INSTANCE.leaveTeam(entry, this);
     }
 
     /**
