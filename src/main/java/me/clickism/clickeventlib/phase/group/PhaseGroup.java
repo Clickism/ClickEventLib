@@ -31,6 +31,11 @@ public interface PhaseGroup extends Named {
     void setCurrentPhase(Phase phase) throws IllegalArgumentException;
 
     /**
+     * Resets the phase group to the initial state.
+     */
+    void reset();
+
+    /**
      * Gets the phases in the group.
      *
      * @return the phases
@@ -103,6 +108,11 @@ public interface PhaseGroup extends Named {
             @Override
             public NamedCollection<Phase> getPhases() {
                 return phases;
+            }
+
+            @Override
+            public void reset() {
+                finished = false;
             }
 
             @Override

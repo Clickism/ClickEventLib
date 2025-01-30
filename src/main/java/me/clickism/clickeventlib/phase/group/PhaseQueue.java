@@ -58,6 +58,11 @@ public class PhaseQueue extends PhaseBase implements PhaseGroup {
     }
 
     @Override
+    public void reset() {
+        nextIndex = 0;
+    }
+
+    @Override
     public NamedCollection<Phase> getPhases() {
         return namedPhases;
     }
