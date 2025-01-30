@@ -14,6 +14,7 @@ public class PhaseSubcommandGroup extends SubcommandGroup {
      */
     public PhaseSubcommandGroup(PhaseManager phaseManager) {
         super("phase", true);
+        addSubcommand(new PhaseStartSubcommand(phaseManager));
         addSubcommand(new PhaseSetSubcommand(phaseManager));
         addSubcommand(new PhaseTimerSubcommand(phaseManager));
         addSubcommand(new PhaseSkipSubcommand(phaseManager));
