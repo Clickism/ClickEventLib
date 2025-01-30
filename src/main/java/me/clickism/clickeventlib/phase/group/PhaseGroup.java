@@ -48,7 +48,17 @@ public interface PhaseGroup extends Named {
     }
 
     /**
-     * Creates a phase group with a single phase.
+     * Creates a phase group with a single phase with the identifier of the phase.
+     *
+     * @param phase the phase
+     * @return the phase group
+     */
+    static PhaseGroup of(Phase phase) {
+        return ofSingle(phase.getId(), phase);
+    }
+
+    /**
+     * Creates a phase group with a single phase with the given identifier.
      *
      * @param identifier the identifier of the phase group
      * @param phase      the phase
