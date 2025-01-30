@@ -34,6 +34,8 @@ import me.clickism.subcommandapi.command.CommandManager;
 import me.clickism.subcommandapi.command.SubcommandGroup;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.logging.Logger;
+
 /**
  * ClickEventLib class.
  */
@@ -42,6 +44,10 @@ public final class ClickEventLib extends JavaPlugin {
      * Singleton instance of the plugin.
      */
     public static ClickEventLib INSTANCE;
+    /**
+     * Logger for the plugin.
+     */
+    public static Logger LOGGER;
 
     /**
      * ClickEventLib constructor.
@@ -67,6 +73,8 @@ public final class ClickEventLib extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        INSTANCE = this;
+        LOGGER = getLogger();
         AutoSaver autoSaver = new AutoSaver(this);
         try {
             this.worldManager = new WorldManager(this, "worlds.json");
@@ -91,7 +99,6 @@ public final class ClickEventLib extends JavaPlugin {
         Role.registerRoles(roleManager);
         Statistics.registerStatistics(statisticManager, leaderboardManager);
         getLogger().info("ClickEventLib activated.");
-        INSTANCE = this;
     }
 
     @Override
