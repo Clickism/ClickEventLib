@@ -99,6 +99,14 @@ public abstract class Phase implements Named {
     public abstract void onLeaveServer(Player player);
 
     /**
+     * Gets the required event locations for the phase.
+     * The "/... phase set" command will give a warning if any of the locations aren't set.
+     *
+     * @return required event locations
+     */
+    public abstract List<EventLocation> getRequiredEventLocations();
+
+    /**
      * Called when the phase timer ticks. Handles the actions for the given seconds.
      *
      * @param secondsPassed seconds passed since the phase started
@@ -136,16 +144,6 @@ public abstract class Phase implements Named {
      */
     public PhaseListener getPhaseListener() {
         return listener;
-    }
-
-    /**
-     * Gets the required event locations for the phase.
-     * The "/... phase set" command will give a warning if any of the locations aren't set.
-     *
-     * @return required event locations
-     */
-    public List<EventLocation> getRequiredEventLocations() {
-        return List.of();
     }
 
     /**
