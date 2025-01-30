@@ -60,7 +60,6 @@ public final class ClickEventLib extends JavaPlugin {
     private RoleManager roleManager;
     private ChatManager chatManager;
     private WorldManager worldManager;
-    private TeamManager teamManager;
 
     private EventLocationManager locationManager;
     private StatisticManager statisticManager;
@@ -116,9 +115,9 @@ public final class ClickEventLib extends JavaPlugin {
                 .addSubcommand(new RoleSubcommandGroup(roleManager, chatManager))
         );
         commandManager.registerCommand(new ChatSubcommandGroup(chatManager));
-        commandManager.registerCommand(new JoinSubcommand(teamManager, chatManager, false));
-        commandManager.registerCommand(new LeaveSubcommand(teamManager, chatManager, false));
-        commandManager.registerCommand(new InviteSubcommand(teamManager, false));
+        commandManager.registerCommand(new JoinSubcommand(chatManager, false));
+        commandManager.registerCommand(new LeaveSubcommand(chatManager, false));
+        commandManager.registerCommand(new InviteSubcommand(false));
     }
 
     /**
