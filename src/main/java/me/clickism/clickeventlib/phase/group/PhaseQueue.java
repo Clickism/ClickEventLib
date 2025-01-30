@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * A group of phases that executes phases in order, one after the other.
  */
-public class PhaseQueue implements PhaseGroup {
+public class PhaseQueue extends PhaseBase implements PhaseGroup {
 
     private final Identifier identifier;
     private final NamedCollection<Phase> namedPhases;

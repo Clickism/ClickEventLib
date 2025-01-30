@@ -2,9 +2,11 @@ package me.clickism.clickeventlib.phase.group;
 
 import me.clickism.clickeventlib.location.EventLocation;
 import me.clickism.clickeventlib.phase.Phase;
+import me.clickism.clickeventlib.phase.StartScript;
 import me.clickism.clickeventlib.util.Identifier;
 import me.clickism.subcommandapi.util.Named;
 import me.clickism.subcommandapi.util.NamedCollection;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -34,6 +36,20 @@ public interface PhaseGroup extends Named {
      * @return the phases
      */
     NamedCollection<Phase> getPhases();
+
+    /**
+     * Adds a start script to the phase group.
+     *
+     * @param startScript the start script
+     */
+    PhaseGroup withStartScript(StartScript startScript);
+
+    /**
+     * Gets the start script for the phase group.
+     *
+     * @return the start script
+     */
+    @NotNull StartScript getStartScript();
 
     /**
      * Gets the required event locations for the group.
@@ -66,7 +82,7 @@ public interface PhaseGroup extends Named {
      * @return the phase group
      */
     static PhaseGroup ofSingle(Identifier identifier, Phase phase) {
-        return new PhaseGroup() {
+        return new PhaseBase() {
             private boolean finished = false;
             private final NamedCollection<Phase> phases = new NamedCollection<>(List.of(phase));
 
