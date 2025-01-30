@@ -205,7 +205,7 @@ public class EventTeam implements Named {
     }
 
     /**
-     * Sets an option for this team.y
+     * Sets an option for this team.
      *
      * @param option the option
      * @param status the status
