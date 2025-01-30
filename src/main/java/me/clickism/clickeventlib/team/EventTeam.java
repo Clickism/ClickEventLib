@@ -2,10 +2,17 @@ package me.clickism.clickeventlib.team;
 
 import me.clickism.clickeventlib.util.Identifier;
 import me.clickism.subcommandapi.util.Named;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.entity.Player;
+import org.bukkit.scoreboard.Team;
+import org.jetbrains.annotations.Nullable;
 
+import java.util.Collections;
 import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Represents a team in an event.
@@ -103,7 +110,7 @@ public class EventTeam implements Named {
      * @param player the player to join
      */
     public void join(OfflinePlayer player) {
-        join(player.getName());
+        TeamManager.INSTANCE.joinTeam(player, this);
     }
 
     /**
@@ -121,7 +128,7 @@ public class EventTeam implements Named {
      * @param player the player to leave
      */
     public void leave(OfflinePlayer player) {
-        leave(player.getName());
+        TeamManager.INSTANCE.leaveTeam(player, this);
     }
 
     /**
@@ -140,7 +147,7 @@ public class EventTeam implements Named {
      * @return true if the player is on the team, false otherwise
      */
     public boolean isOnTeam(OfflinePlayer player) {
-        return isOnTeam(player.getName());
+        return TeamManager.INSTANCE.isOnTeam(player, this);
     }
 
     /**
@@ -197,6 +204,21 @@ public class EventTeam implements Named {
         return this;
     }
 
+    /**
+     * Sets an option for this team.y
+     *
+     * @param option the option
+     * @param status the status
+     * @return this team
+     */
+    public EventTeam withOption(Team.Option option, Team.OptionStatus status) {
+        Team team = TeamManager.INSTANCE.getScoreboardTeam(this);
+        if (team != null) {
+            team.setOption(option, status);
+        }
+        return this;
+    }
+
     @Override
     public String getName() {
         return name;
@@ -218,6 +240,28 @@ public class EventTeam implements Named {
      */
     public String getPrefix() {
         return prefix;
+    }
+
+    /**
+     * Gets an immutable set of the entries in this team.
+     *
+     * @return the entries of this team
+     */
+    public Set<String> getEntries() {
+        Team team = TeamManager.INSTANCE.getScoreboardTeam(this);
+        return team == null ? Set.of() : Collections.unmodifiableSet(team.getEntries());
+    }
+
+    /**
+     * Gets an immutable set of the online players in this team.
+     *
+     * @return the online players in this team
+     */
+    public Set<Player> getOnlinePlayers() {
+        return getEntries().stream()
+                .map(Bukkit::getPlayer)
+                .filter(Objects::nonNull)
+                .collect(Collectors.toSet());
     }
 
     /**
@@ -245,32 +289,42 @@ public class EventTeam implements Named {
     }
 
     /**
+     * Gets the scoreboard team of this team.
+     *
+     * @return the scoreboard team for this team
+     */
+    @Nullable
+    public Team getScoreboardTeam() {
+        return TeamManager.INSTANCE.getScoreboardTeam(this);
+    }
+
+    /**
+     * Gets the team of the given player.
+     *
+     * @param player the player
+     * @return the team of the player
+     */
+    public static EventTeam getTeamOf(OfflinePlayer player) {
+        return TeamManager.INSTANCE.getTeamOf(player);
+    }
+
+    /**
+     * Gets the team of the given entry.
+     *
+     * @param entry the entry
+     * @return the team of the entry
+     */
+    public static EventTeam getTeamOf(String entry) {
+        return TeamManager.INSTANCE.getTeamOf(entry);
+    }
+
+    /**
      * Creates a new team with the given name and registers it with the team manager.
      *
      * @param identifier the identifier of the team
      * @return the new team
      */
-    public static EventTeam of(Identifier identifier) {
+    public static EventTeam create(Identifier identifier) {
         return new EventTeam(identifier.toString());
-    }
-
-    /**
-     * Registers all default teams with the given team manager.
-     *
-     * @param teamManager the team manager to register the teams with
-     */
-    public static void registerTeams(TeamManager teamManager) {
-        teamManager.registerTeam(RED);
-        teamManager.registerTeam(BLUE);
-        teamManager.registerTeam(GREEN);
-        teamManager.registerTeam(YELLOW);
-        teamManager.registerTeam(ORANGE);
-        teamManager.registerTeam(ANTHRACITE);
-        teamManager.registerTeam(GRAY);
-        teamManager.registerTeam(CYAN);
-        teamManager.registerTeam(MOSS);
-        teamManager.registerTeam(PURPLE);
-        teamManager.registerTeam(BLOOD);
-        teamManager.registerTeam(OCEAN);
     }
 }
