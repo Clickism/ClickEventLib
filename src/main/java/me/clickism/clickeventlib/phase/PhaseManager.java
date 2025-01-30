@@ -203,16 +203,19 @@ public class PhaseManager implements Listener {
 
     /**
      * Set and start the given phase group.
+     * Runs the start script.
      *
      * @param phaseGroup phase group to start
      */
     public void startPhaseGroup(PhaseGroup phaseGroup) {
         setPhaseGroup(phaseGroup);
+        phaseGroup.getStartScript().run();
         startNextPhase();
     }
 
     /**
      * Set the current phase group.
+     * Does NOT run the start script.
      *
      * @param phaseGroup phase group
      */

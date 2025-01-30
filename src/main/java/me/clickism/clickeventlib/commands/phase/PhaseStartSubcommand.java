@@ -60,15 +60,20 @@ class PhaseStartSubcommand extends PhaseSubcommand {
         if (!argHandler.hasFlag(FORCE_FLAG)) {
             validateEventLocations(group.getRequiredEventLocations());
         }
-        phaseManager.setPhaseGroup(group);
         String message = "Started phase group &l" + group.getName();
-        if (phase != null) {
+        if (phase != null && !phase.equals(group.getNextPhase())) {
+            // Phase is not the first in the group
+            phaseManager.setPhaseGroup(group);
             if (raw) {
                 phaseManager.setPhase(phase);
             } else {
                 phaseManager.startPhase(phase);
             }
             message += "&a at phase &l" + phase.getName();
+        } else {
+            // Phase is the first in the group
+            // So start group with the starting script
+            phaseManager.startPhaseGroup(group);
         }
         if (timer != null) {
             phaseManager.setSecondsRemaining(timer);
