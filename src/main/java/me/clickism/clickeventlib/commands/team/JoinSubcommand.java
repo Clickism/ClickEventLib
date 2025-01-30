@@ -22,21 +22,18 @@ public class JoinSubcommand extends Subcommand {
     private final SelectionArgument<EventTeam> teamArgument;
     private final OfflinePlayersArgument playersArgument = new OfflinePlayersArgument("players", false);
 
-    private final TeamManager teamManager;
     private final ChatManager chatManager;
 
     /**
      * Creates a new team subcommand.
      *
-     * @param teamManager the team manager
      * @param chatManager the chat manager
      * @param requiresOp  whether the command requires operator permissions
      */
-    public JoinSubcommand(TeamManager teamManager, ChatManager chatManager, boolean requiresOp) {
+    public JoinSubcommand(ChatManager chatManager, boolean requiresOp) {
         super("join", requiresOp);
-        this.teamManager = teamManager;
         this.chatManager = chatManager;
-        this.teamArgument = new SelectionArgument<>("team", true, teamManager.getTeams());
+        this.teamArgument = new SelectionArgument<>("team", true, TeamManager.INSTANCE.getTeams());
         addArgument(teamArgument);
         addArgument(playersArgument);
     }
@@ -49,7 +46,7 @@ public class JoinSubcommand extends Subcommand {
             // Operator command
             if (!sender.isOp()) return CommandResult.failure("You can't use this command");
             players.forEach(player -> {
-                teamManager.joinTeam(player, team);
+                team.join(player);
                 chatManager.refreshName(player);
             });
             return CommandResult.success("Added player(s): &l" + FormatUtils.formatPlayers(players) + " &ato team &l" + team.getName() + "&a.");
@@ -60,15 +57,15 @@ public class JoinSubcommand extends Subcommand {
         }
         return switch (team.getJoinSetting()) {
             case EVERYONE_OPEN -> {
-                teamManager.joinTeam(player, team);
+                team.join(player);
                 chatManager.refreshName(player);
                 yield CommandResult.success("Joined team &l" + team.getName() + "&a.");
             }
             case EVERYONE_INVITE -> {
-                if (!teamManager.isInvited(player, team)) {
+                if (!TeamManager.INSTANCE.isInvited(player, team)) {
                     yield CommandResult.failure("You haven't been invited to this team.");
                 }
-                teamManager.joinTeam(player, team);
+                team.join(player);
                 chatManager.refreshName(player);
                 yield CommandResult.success("Joined team &l" + team.getName() + "&a.");
             }
@@ -76,7 +73,7 @@ public class JoinSubcommand extends Subcommand {
                 if (!player.isOp()) {
                     yield CommandResult.failure("You can't join this team.");
                 }
-                teamManager.joinTeam(player, team);
+                team.join(player);
                 chatManager.refreshName(player);
                 yield CommandResult.success("Joined team &l" + team.getName() + "&a.");
             }

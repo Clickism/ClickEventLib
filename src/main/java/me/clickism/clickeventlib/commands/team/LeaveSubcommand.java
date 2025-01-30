@@ -19,19 +19,16 @@ public class LeaveSubcommand extends Subcommand {
 
     private final OfflinePlayersArgument playersArgument = new OfflinePlayersArgument("players", false);
 
-    private final TeamManager teamManager;
     private final ChatManager chatManager;
 
     /**
      * Creates a new team subcommand.
      *
-     * @param teamManager the team manager
      * @param chatManager the chat manager
      * @param requiresOp  whether the command requires operator permissions
      */
-    public LeaveSubcommand(TeamManager teamManager, ChatManager chatManager, boolean requiresOp) {
+    public LeaveSubcommand(ChatManager chatManager, boolean requiresOp) {
         super("leave", requiresOp);
-        this.teamManager = teamManager;
         this.chatManager = chatManager;
         addArgument(playersArgument);
     }
@@ -43,7 +40,7 @@ public class LeaveSubcommand extends Subcommand {
             if (!(sender instanceof Player player)) {
                 return CommandResult.failure("You must be a player to leave a team.");
             }
-            EventTeam team = teamManager.leaveTeam(player);
+            EventTeam team = EventTeam.getTeamOf(player);
             if (team == null) {
                 return CommandResult.failure("You are not in a team.");
             }
@@ -53,7 +50,7 @@ public class LeaveSubcommand extends Subcommand {
         if (!sender.isOp()) return CommandResult.warning("You can't use this command");
         players.forEach(player -> {
             if (player.getName() == null) return;
-            teamManager.leaveTeam(player);
+            TeamManager.INSTANCE.leaveTeam(player);
             chatManager.refreshName(player);
         });
         return CommandResult.success("Removed players: &l" + FormatUtils.formatPlayers(players) + " &afrom their teams.");

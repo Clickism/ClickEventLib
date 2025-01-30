@@ -161,6 +161,36 @@ public class EventTeam implements Named {
     }
 
     /**
+     * Checks if a player is invited to this team.
+     *
+     * @param player the player to check
+     * @return true if the player is invited, false otherwise
+     */
+    public boolean isInvited(Player player) {
+        return TeamManager.INSTANCE.isInvited(player, this);
+    }
+
+    /**
+     * Invites a player to this team.
+     *
+     * @param player the player to invite
+     * @return true if the player was invited, false if the player was already invited
+     */
+    public boolean invite(Player player) {
+        if (!canAcceptInvites()) return false;
+        return TeamManager.INSTANCE.invite(player, this);
+    }
+
+    /**
+     * Checks if this team can accept invites.
+     *
+     * @return true if this team can accept invites, false otherwise
+     */
+    public boolean canAcceptInvites() {
+        return TeamManager.INSTANCE.canAcceptInvites(this);
+    }
+
+    /**
      * Sets the color of the team.
      *
      * @param color the color of the team
@@ -312,10 +342,33 @@ public class EventTeam implements Named {
      * Gets the team of the given entry.
      *
      * @param entry the entry
-     * @return the team of the entry
+     * @return the team of the entry, or null if the entry is not on a team
      */
+    @Nullable
     public static EventTeam getTeamOf(String entry) {
         return TeamManager.INSTANCE.getTeamOf(entry);
+    }
+
+    /**
+     * Leaves this player from their team.
+     *
+     * @param player the player to leave
+     * @return the team the player left, or null if the player was not on a team
+     */
+    @Nullable
+    public static EventTeam leaveTeam(OfflinePlayer player) {
+        return TeamManager.INSTANCE.leaveTeam(player);
+    }
+
+    /**
+     * Leaves this entry from their team.
+     *
+     * @param entry the entry to leave
+     * @return the team the entry left, or null if the entry was not on a team
+     */
+    @Nullable
+    public static EventTeam leaveTeam(String entry) {
+        return TeamManager.INSTANCE.leaveTeam(entry);
     }
 
     /**

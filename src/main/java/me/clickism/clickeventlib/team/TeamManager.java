@@ -253,7 +253,7 @@ public class TeamManager implements Listener {
      * @param eventTeam the team to invite the player to
      * @return true if the player was successfully invited, false if the player was already invited
      */
-    public boolean invitePlayer(OfflinePlayer player, EventTeam eventTeam) {
+    public boolean invite(OfflinePlayer player, EventTeam eventTeam) {
         Set<EventTeam> teams = inviteMap.computeIfAbsent(player.getUniqueId(), k -> new HashSet<>());
         if (teams.contains(eventTeam)) return false;
         teams.add(eventTeam);
@@ -266,7 +266,7 @@ public class TeamManager implements Listener {
      * @param eventTeam the team to check if it can be invited to
      * @return true if this team can be invited to, false otherwise
      */
-    public boolean isInvitable(EventTeam eventTeam) {
+    public boolean canAcceptInvites(EventTeam eventTeam) {
         return eventTeam.getJoinSetting() == JoinSetting.EVERYONE_INVITE;
     }
 

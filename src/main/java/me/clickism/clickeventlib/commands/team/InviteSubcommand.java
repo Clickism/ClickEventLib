@@ -14,37 +14,34 @@ import org.bukkit.entity.Player;
 public class InviteSubcommand extends PlayerOnlySubcommand {
     private static final SinglePlayerArgument PLAYER_ARGUMENT = new SinglePlayerArgument("player", true);
 
-    private final TeamManager teamManager;
-
     /**
      * Create a new invite subcommand.
      *
-     * @param teamManager the team manager
      * @param requiresOp  true if the command requires operator permissions, false otherwise
      */
-    public InviteSubcommand(TeamManager teamManager, boolean requiresOp) {
+    public InviteSubcommand(boolean requiresOp) {
         super("invite", requiresOp);
-        this.teamManager = teamManager;
         addArgument(PLAYER_ARGUMENT);
     }
 
     @Override
     protected CommandResult execute(CommandStack trace, Player sender, ArgumentHandler argHandler) throws CommandException {
         Player player = argHandler.get(PLAYER_ARGUMENT);
-        EventTeam senderTeam = teamManager.getTeamOf(sender);
+        EventTeam senderTeam = EventTeam.getTeamOf(sender);
+        EventTeam playerTeam = EventTeam.getTeamOf(player);
         if (senderTeam == null) {
             return CommandResult.failure("You are not in a team. Use &4&l/join &cto join a team first.");
         }
-        if (teamManager.isInvited(player, senderTeam)) {
-            return CommandResult.failure("You have already invited this player.");
-        }
-        if (senderTeam.equals(teamManager.getTeamOf(player))) {
+        if (senderTeam.equals(playerTeam)) {
             return CommandResult.failure("This player is already in your team.");
+        }
+        if (senderTeam.isInvited(player)) {
+            return CommandResult.failure("You have already invited this player.");
         }
         return switch (senderTeam.getJoinSetting()) {
             case EVERYONE_OPEN -> CommandResult.warning("This team is open to everyone.");
             case EVERYONE_INVITE -> {
-                if (!teamManager.invitePlayer(player, senderTeam)) {
+                if (!senderTeam.invite(player)) {
                     yield CommandResult.failure("This player is already invited to your team.");
                 }
                 MessageType.WARN.send(player, "You have been invited to join " + senderTeam.getColor() + "&l" + senderTeam.getName() +
