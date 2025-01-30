@@ -68,9 +68,8 @@ public final class ClickEventLib extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        AutoSaver autoSaver;
+        AutoSaver autoSaver = new AutoSaver(this);
         try {
-            autoSaver = new AutoSaver(this);
             this.worldManager = new WorldManager(this, "worlds.json");
             EventBar eventBar = new EventBar(this, EventBar.DEFAULT_TITLE);
             this.phaseManager = new PhaseManager(this, eventBar, "phase.json", worldManager);
@@ -91,7 +90,6 @@ public final class ClickEventLib extends JavaPlugin {
         autoSaver.register();
         registerCommands();
         Role.registerRoles(roleManager);
-        EventTeam.registerTeams(teamManager);
         Statistics.registerStatistics(statisticManager, leaderboardManager);
         getLogger().info("ClickEventLib activated.");
         INSTANCE = this;
