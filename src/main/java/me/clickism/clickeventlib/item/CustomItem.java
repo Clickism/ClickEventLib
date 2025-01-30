@@ -4,7 +4,6 @@ import me.clickism.clickeventlib.ClickEventLib;
 import me.clickism.clickeventlib.annotations.Colorized;
 import me.clickism.clickeventlib.util.Identifier;
 import me.clickism.clickeventlib.util.Utils;
-import me.clickism.clickgui.menu.Icon;
 import me.clickism.subcommandapi.util.Named;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -302,6 +301,7 @@ public class CustomItem implements Named {
      * Applies a consumer to the item's meta.
      *
      * @param consumer consumer to apply
+     * @return this item
      */
     public CustomItem applyToMeta(Consumer<ItemMeta> consumer) {
         ItemMeta meta = item.getItemMeta();
