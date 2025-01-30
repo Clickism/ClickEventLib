@@ -53,7 +53,7 @@ public interface PhaseGroup extends Named {
      * @param phase the phase
      * @return the phase group
      */
-    static PhaseGroup of(Phase phase) {
+    static PhaseGroup ofSingle(Phase phase) {
         return ofSingle(phase.getId(), phase);
     }
 
