@@ -13,7 +13,8 @@ class WorldForgetSubcommand extends Subcommand {
 
     public WorldForgetSubcommand(WorldManager worldManager) {
         super("forget", true);
-        this.worldNameArgument = new SelectionArgument<>("world", true, () -> NamedCollection.of(worldManager.getWorldNames()));
+        this.worldNameArgument = new SelectionArgument<>("world", true,
+                () -> NamedCollection.ofStrings(worldManager.getWorldNames()));
         this.worldManager = worldManager;
         addArgument(worldNameArgument);
     }
