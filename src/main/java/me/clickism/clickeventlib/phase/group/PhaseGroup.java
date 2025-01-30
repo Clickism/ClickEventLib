@@ -41,6 +41,7 @@ public interface PhaseGroup extends Named {
      * Adds a start script to the phase group.
      *
      * @param startScript the start script
+     * @return the phase group
      */
     PhaseGroup withStartScript(StartScript startScript);
 
