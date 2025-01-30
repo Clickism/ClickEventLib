@@ -44,6 +44,7 @@ public interface PhaseGroup extends Named {
         return getPhases().stream()
                 .map(Phase::getRequiredEventLocations)
                 .flatMap(List::stream)
+                .distinct()
                 .toList();
     }
 
