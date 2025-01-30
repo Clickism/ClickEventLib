@@ -1,6 +1,7 @@
 package me.clickism.clickeventlib.util;
 
 import me.clickism.clickeventlib.trigger.TriggerBox;
+import me.clickism.subcommandapi.util.Named;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 
@@ -133,6 +134,18 @@ public class FormatUtils {
         }
         return players.stream()
                 .map(OfflinePlayer::getName)
+                .collect(Collectors.joining(", "));
+    }
+
+    /**
+     * Formats a collection of named objects into a human-readable list.
+     *
+     * @param namedCollection the named objects to format
+     * @return the formatted list
+     */
+    public static String formatNamedCollection(Collection<? extends Named> namedCollection) {
+        return namedCollection.stream()
+                .map(Named::getName)
                 .collect(Collectors.joining(", "));
     }
 }
