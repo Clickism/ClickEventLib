@@ -1,6 +1,7 @@
 package me.clickism.clickeventlib.phase;
 
 import com.google.gson.JsonObject;
+import me.clickism.clickeventlib.ClickEventLib;
 import me.clickism.clickeventlib.annotations.AutoRegistered;
 import me.clickism.clickeventlib.annotations.RegistryType;
 import me.clickism.clickeventlib.location.EventWorld;
@@ -68,9 +69,7 @@ public class PhaseManager implements Listener {
      */
     public PhaseManager register(PhaseGroup phaseGroup) {
         phaseGroups.add(phaseGroup);
-        for (Phase phase : phaseGroup.getPhases()) {
-            if (tryLoad(phase)) break;
-        }
+        tryLoad(phaseGroup);
         return this;
     }
 
@@ -135,6 +134,7 @@ public class PhaseManager implements Listener {
         }
         currentPhase = phase;
         currentPhaseGroup.setCurrentPhase(phase);
+        secondsPassed = 0;
         initPhase(phase, start);
         save();
     }
@@ -221,6 +221,7 @@ public class PhaseManager implements Listener {
      */
     public void setPhaseGroup(PhaseGroup phaseGroup) {
         this.currentPhaseGroup = phaseGroup;
+        this.currentPhaseGroup.reset();
     }
 
     /**
@@ -280,6 +281,7 @@ public class PhaseManager implements Listener {
      * @param secondsRemaining seconds
      */
     public void setSecondsRemaining(long secondsRemaining) {
+        if (currentPhase == null) return;
         long duration = currentPhase.getDuration();
         this.secondsPassed = duration - secondsRemaining;
         updateBar();
@@ -318,25 +320,26 @@ public class PhaseManager implements Listener {
 
     private void save() {
         JsonObject json = new JsonObject();
+        json.addProperty("group", currentPhaseGroup != null ? currentPhaseGroup.getName() : null);
         json.addProperty("phase", currentPhase != null ? currentPhase.getName() : null);
         json.addProperty("seconds", secondsPassed);
         dataManager.save(json);
     }
 
-    /**
-     * Try to load the phase and seconds from the data manager.
-     *
-     * @param phase phase to load
-     * @return true if the phase was loaded, false otherwise
-     */
-    private boolean tryLoad(Phase phase) {
+    private void tryLoad(PhaseGroup group) {
         JsonObject root = dataManager.getRoot();
-        if (!root.has("phase")) return false;
+        if (!root.has("group")) return;
+        String groupName = root.get("group").getAsString();
         String phaseName = root.get("phase").getAsString();
         long seconds = root.get("seconds").getAsLong();
-        if (!phase.getName().equals(phaseName)) return false;
-        initPhase(phase, false);
+
+        if (!group.getName().equals(groupName)) return;
+        setPhaseGroup(group);
+        Phase phase = group.getPhases().get(phaseName);
+        if (phase == null) {
+            ClickEventLib.LOGGER.severe("Phase '" + phaseName + "' not found in group '" + groupName + "'");
+        }
+        setPhase(phase, false);
         setSecondsPassed(seconds);
-        return true;
     }
 }

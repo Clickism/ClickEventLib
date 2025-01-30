@@ -24,7 +24,7 @@ class PhaseStartSubcommand extends PhaseSubcommand {
             new TimeArgument("timer", false);
 
     private final SelectionArgument<PhaseGroup> phaseGroupArgument;
-    private final SelectionArgument<Phase> phaseArgument;
+    private final FakeArgument phaseArgument;
 
     private final PhaseManager phaseManager;
 
@@ -32,21 +32,26 @@ class PhaseStartSubcommand extends PhaseSubcommand {
         super("start", true);
         this.phaseManager = phaseManager;
         this.phaseGroupArgument = new SelectionArgument<>("phase_group", true, phaseManager.getPhaseGroups());
-        this.phaseArgument = new SelectionArgument<>("phase", true, phaseManager.getPhasesInCurrentGroup());
+        this.phaseArgument = new FakeArgument("phase", false);
         addArgument(phaseGroupArgument);
         addArgument(phaseArgument);
         addArgument(TIME_ARGUMENT);
         addFlag(RAW_FLAG);
+        addFlag(FORCE_FLAG);
     }
 
     @Override
     public List<String> getTabCompletion(int index, CommandSender sender, String[] args) {
         List<Argument<?>> arguments = getArguments();
         if (index < arguments.size() && arguments.get(index).equals(phaseArgument)) {
-            PhaseGroup group = phaseGroupArgument.parse(sender, args[index - 1]);
-            return group.getPhases().stream()
-                    .map(Phase::getName)
-                    .collect(Collectors.toList());
+            try {
+                PhaseGroup group = phaseGroupArgument.parse(sender, args[index - 1]);
+                return group.getPhases().stream()
+                        .map(Phase::getName)
+                        .collect(Collectors.toList());
+            } catch (CommandException e) {
+                return List.of();
+            }
         }
         return super.getTabCompletion(index, sender, args);
     }
@@ -54,16 +59,16 @@ class PhaseStartSubcommand extends PhaseSubcommand {
     @Override
     protected CommandResult execute(CommandStack trace, CommandSender sender, ArgumentHandler argHandler) throws CommandException {
         PhaseGroup group = argHandler.get(phaseGroupArgument);
-        Phase phase = argHandler.getOrNull(phaseArgument);
+        Phase phase = parsePhase(group, argHandler);
         Long timer = argHandler.getOrNull(TIME_ARGUMENT);
         boolean raw = argHandler.hasFlag(RAW_FLAG);
         if (!argHandler.hasFlag(FORCE_FLAG)) {
             validateEventLocations(group.getRequiredEventLocations());
         }
         String message = "Started phase group &l" + group.getName();
+        phaseManager.setPhaseGroup(group);
         if (phase != null && !phase.equals(group.getNextPhase())) {
             // Phase is not the first in the group
-            phaseManager.setPhaseGroup(group);
             if (raw) {
                 phaseManager.setPhase(phase);
             } else {
@@ -82,4 +87,39 @@ class PhaseStartSubcommand extends PhaseSubcommand {
         return CommandResult.success(message + ".");
     }
 
+    private Phase parsePhase(PhaseGroup group, ArgumentHandler argHandler) {
+        String[] args = argHandler.getArgs();
+        int index = getArguments().indexOf(phaseArgument);
+        if (args.length <= index) {
+            return null; // No phase specified
+        }
+        String phaseName = args[index];
+        Phase phase = group.getPhases().get(phaseName);
+        if (phase == null) {
+            throw new CommandException("Phase not found in group."); // Invalid phase
+        }
+        return phase;
+    }
+
+    private static class FakeArgument extends Argument<String> {
+        /**
+         * Creates a new argument.
+         *
+         * @param name     the key of the argument
+         * @param required whether the argument is required
+         */
+        public FakeArgument(String name, boolean required) {
+            super(name, required);
+        }
+
+        @Override
+        public List<String> getTabCompletion(CommandSender sender, String arg) {
+            return List.of(getName());
+        }
+
+        @Override
+        public String parse(CommandSender sender, String arg) throws CommandException {
+            return getName();
+        }
+    }
 }

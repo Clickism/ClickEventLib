@@ -22,7 +22,7 @@ class PhaseSetSubcommand extends PhaseSubcommand {
     public PhaseSetSubcommand(PhaseManager phaseManager) {
         super("set", true);
         this.phaseManager = phaseManager;
-        this.phaseArgument = new SelectionArgument<>("phase", true, phaseManager.getPhasesInCurrentGroup());
+        this.phaseArgument = new SelectionArgument<>("phase", true, phaseManager::getPhasesInCurrentGroup);
         addArgument(phaseArgument);
         addArgument(TIME_ARGUMENT);
         addFlag(RAW_FLAG);
