@@ -8,5 +8,5 @@ public interface StartScript {
     /**
      * Starts the script.
      */
-    void start();
+    void run();
 }
