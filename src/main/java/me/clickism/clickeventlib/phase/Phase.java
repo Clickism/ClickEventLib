@@ -180,18 +180,4 @@ public abstract class Phase implements Named {
      */
     public abstract String getEventBarTitle(long seconds);
 
-    /**
-     * Gets the next phase override after this phase ends.
-     * <p>
-     * The returned phase will not be separately registered by the
-     * {@link PhaseManager} and will be directly started as the next phase.
-     * To avoid issues, make sure that either a phase with the same name is
-     * registered or an already registered phase instance is used.
-     * Only the registered phase will be loaded after a server restart/reload.
-     *
-     * @return next phase after this phase ends, null if not overridden
-     */
-    public Phase getNextPhaseOverride() {
-        return null;
-    }
 }
