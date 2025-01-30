@@ -5,6 +5,7 @@ import me.clickism.clickeventlib.annotations.AutoRegistered;
 import me.clickism.clickeventlib.annotations.RegistryType;
 import me.clickism.clickeventlib.location.EventWorld;
 import me.clickism.clickeventlib.location.WorldManager;
+import me.clickism.clickeventlib.phase.group.PhaseGroup;
 import me.clickism.clickeventlib.serialization.JSONDataManager;
 import me.clickism.subcommandapi.util.NamedCollection;
 import org.bukkit.Bukkit;
@@ -18,7 +19,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
 // TODO : TELEPORT TO WORLD SPAWN ON DEATH EVENT PRIORITY
 
 /**
@@ -27,11 +28,10 @@ import java.util.*;
 public class PhaseManager implements Listener {
     private final JavaPlugin plugin;
 
-    private final NamedCollection<Phase> namedPhases = new NamedCollection<>(new LinkedList<>());
-    private final List<Phase> phases = new ArrayList<>();
-    private final Deque<Phase> phaseQueue = new ArrayDeque<>();
+    private final NamedCollection<PhaseGroup> phaseGroups = new NamedCollection<>(new ArrayList<>());
 
-    private Phase currentPhase;
+    private @Nullable PhaseGroup currentPhaseGroup;
+    private @Nullable Phase currentPhase;
 
     private long secondsPassed = 0;
 
@@ -61,34 +61,16 @@ public class PhaseManager implements Listener {
     }
 
     /**
-     * Register a phase.
-     * <p>
-     * Phases will be executed in the registration order.
+     * Register a phase group.
      *
-     * @param phase phase to register
+     * @param phaseGroup phase group to register
      * @return this phase manager
      */
-    public PhaseManager register(Phase phase) {
-        phases.add(phase);
-        namedPhases.add(phase);
-        phaseQueue.add(phase);
-        tryLoad(phase);
-        return this;
-    }
-
-    /**
-     * Register a phase.
-     * <p>
-     * This phase will be put in the beginning of the phase queue.
-     *
-     * @param phase phase to register
-     * @return this phase manager
-     */
-    public PhaseManager registerFirst(Phase phase) {
-        phases.add(0, phase);
-        namedPhases.add(phase);
-        phaseQueue.addFirst(phase);
-        tryLoad(phase);
+    public PhaseManager register(PhaseGroup phaseGroup) {
+        phaseGroups.add(phaseGroup);
+        for (Phase phase : phaseGroup.getPhases()) {
+            if (tryLoad(phase)) break;
+        }
         return this;
     }
 
@@ -112,84 +94,49 @@ public class PhaseManager implements Listener {
     }
 
     /**
-     * Set and start the new phase.
-     * <p>
-     * This will reconstruct the phase queue to start from the new phase.
-     *
-     * @param phase new phase
-     */
-    public void startPhase(Phase phase) {
-        reconstructQueue(phase); // Reconstruct queue to start from the new phase
-        phaseQueue.poll(); // Remove the current phase from the queue
-        startNextPhase(phase); // Start the new phase
-    }
-
-    /**
-     * Start the next phase in the queue or the next phase override of the current phase
-     * if it has one.
+     * Start the next phase in the current phase group.
      *
      * @return next phase, or null if the last phase was reached
      */
     @Nullable
     public Phase startNextPhase() {
-        return startNextPhase(null);
+        Phase nextPhase = getNextPhase();
+        if (nextPhase == null) return null;
+        startPhase(nextPhase);
+        return nextPhase;
     }
 
     /**
-     * Start the given phase, or the next phase in the queue or the next phase override of the current phase
-     * if the given phase is null.
+     * Set and start the given phase.
      *
-     * @param toStart phase to start or null
-     * @return started phase, or null if the last phase was reached
+     * @param phase phase to start
+     * @throws IllegalArgumentException if the phase is not in the current phase group
      */
-    private Phase startNextPhase(@Nullable Phase toStart) {
+    public void startPhase(Phase phase) throws IllegalArgumentException {
+        setPhase(phase, true);
+    }
+
+    /**
+     * Set and initialize the given phase without starting it.
+     *
+     * @param phase phase to set
+     * @throws IllegalArgumentException if the phase is not in the current phase group
+     */
+    public void setPhase(Phase phase) throws IllegalArgumentException {
+        setPhase(phase, false);
+    }
+
+    private void setPhase(Phase phase, boolean start) throws IllegalArgumentException {
+        if (currentPhaseGroup == null) {
+            throw new IllegalArgumentException("No phase group set");
+        }
         if (currentPhase != null) {
             endPhase(currentPhase);
-        }
-        Phase phase = toStart != null ? toStart : getNextPhaseOrOverride();
-        if (phase == null) {
-            return null;
         }
         currentPhase = phase;
-        secondsPassed = 0;
-        setPhase(phase, true);
-        return phase;
-    }
-
-    /**
-     * Get the next phase in the queue or the next phase override of the current phase.
-     *
-     * @return next phase, or null if the last phase was reached and there is no phase override
-     */
-    @Nullable
-    private Phase getNextPhaseOrOverride() {
-        Phase phase = null;
-        if (currentPhase != null) {
-            phase = currentPhase.getNextPhaseOverride();
-        }
-        if (phase != null) {
-            return phase;
-        }
-        if (phaseQueue.isEmpty()) {
-            // No phase override and no next phase in the queue
-            return null;
-        }
-        return phaseQueue.poll();
-    }
-
-    /**
-     * Set the current phase, this won't start the phase.
-     *
-     * @param phase new phase
-     */
-    public void setPhase(Phase phase) {
-        reconstructQueue(phase); // Reconstruct queue to start from the new phase
-        if (currentPhase != null) {
-            endPhase(currentPhase);
-        }
-        currentPhase = phaseQueue.poll();
-        if (currentPhase == null) return;
-        setPhase(currentPhase, false);
+        currentPhaseGroup.setCurrentPhase(phase);
+        initPhase(phase, start);
+        save();
     }
 
     /**
@@ -198,7 +145,7 @@ public class PhaseManager implements Listener {
      * @param phase phase to set
      * @param start whether to start the phase
      */
-    private void setPhase(Phase phase, boolean start) {
+    private void initPhase(Phase phase, boolean start) {
         phase.onSet();
         phase.getEventWorlds().forEach(this::setupEventWorld);
         if (start) {
@@ -234,49 +181,14 @@ public class PhaseManager implements Listener {
     }
 
     /**
-     * Reconstruct the phase queue to start from the given phase.
-     *
-     * @param startingPhase starting phase
-     */
-    private void reconstructQueue(Phase startingPhase) {
-        phaseQueue.clear();
-        boolean add = false;
-        for (Phase phase : phases) {
-            if (!add && phase.equals(startingPhase)) {
-                add = true;
-            }
-            if (add) {
-                phaseQueue.add(phase);
-            }
-        }
-    }
-
-    /**
      * Get the next phase, or null if the last phase was reached.
      *
      * @return next phase
      */
     @Nullable
     public Phase getNextPhase() {
-        return phaseQueue.peek();
-    }
-
-    /**
-     * Get the list of phases.
-     *
-     * @return phases
-     */
-    public List<Phase> getPhaseList() {
-        return phases;
-    }
-
-    /**
-     * Get the named collection of phases.
-     *
-     * @return named phases
-     */
-    public NamedCollection<Phase> getPhases() {
-        return namedPhases;
+        if (currentPhaseGroup == null) return null;
+        return currentPhaseGroup.getNextPhase();
     }
 
     /**
@@ -287,6 +199,56 @@ public class PhaseManager implements Listener {
     @Nullable
     public Phase getCurrentPhase() {
         return currentPhase;
+    }
+
+    /**
+     * Set and start the given phase group.
+     *
+     * @param phaseGroup phase group to start
+     */
+    public void startPhaseGroup(PhaseGroup phaseGroup) {
+        setPhaseGroup(phaseGroup);
+        startNextPhase();
+    }
+
+    /**
+     * Set the current phase group.
+     *
+     * @param phaseGroup phase group
+     */
+    public void setPhaseGroup(PhaseGroup phaseGroup) {
+        this.currentPhaseGroup = phaseGroup;
+    }
+
+    /**
+     * Get the current phase group.
+     *
+     * @return current phase group
+     */
+    @Nullable
+    public PhaseGroup getCurrentPhaseGroup() {
+        return currentPhaseGroup;
+    }
+
+    /**
+     * Get the named collection of phases.
+     *
+     * @return named phases
+     */
+    public NamedCollection<PhaseGroup> getPhaseGroups() {
+        return phaseGroups;
+    }
+
+    /**
+     * Get the phases in the current group.
+     *
+     * @return phases in the current group
+     */
+    public NamedCollection<Phase> getPhasesInCurrentGroup() {
+        if (currentPhaseGroup == null) {
+            return NamedCollection.of();
+        }
+        return currentPhaseGroup.getPhases();
     }
 
     /**
@@ -358,14 +320,20 @@ public class PhaseManager implements Listener {
         dataManager.save(json);
     }
 
-    private void tryLoad(Phase phase) {
+    /**
+     * Try to load the phase and seconds from the data manager.
+     *
+     * @param phase phase to load
+     * @return true if the phase was loaded, false otherwise
+     */
+    private boolean tryLoad(Phase phase) {
         JsonObject root = dataManager.getRoot();
-        if (!root.has("phase")) return;
+        if (!root.has("phase")) return false;
         String phaseName = root.get("phase").getAsString();
         long seconds = root.get("seconds").getAsLong();
-        if (phase.getName().equals(phaseName)) {
-            setPhase(phase);
-            setSecondsPassed(seconds);
-        }
+        if (!phase.getName().equals(phaseName)) return false;
+        initPhase(phase, false);
+        setSecondsPassed(seconds);
+        return true;
     }
 }
