@@ -2,7 +2,6 @@ package me.clickism.clickeventlib.commands.team;
 
 import me.clickism.clickeventlib.chat.MessageType;
 import me.clickism.clickeventlib.team.EventTeam;
-import me.clickism.clickeventlib.team.TeamManager;
 import me.clickism.subcommandapi.argument.SinglePlayerArgument;
 import me.clickism.subcommandapi.command.*;
 import org.bukkit.entity.Player;
@@ -17,7 +16,7 @@ public class InviteSubcommand extends PlayerOnlySubcommand {
     /**
      * Create a new invite subcommand.
      *
-     * @param requiresOp  true if the command requires operator permissions, false otherwise
+     * @param requiresOp true if the command requires operator permissions, false otherwise
      */
     public InviteSubcommand(boolean requiresOp) {
         super("invite", requiresOp);

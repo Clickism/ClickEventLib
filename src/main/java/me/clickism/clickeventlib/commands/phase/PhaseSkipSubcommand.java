@@ -33,11 +33,11 @@ class PhaseSkipSubcommand extends Subcommand {
         if (phase == null) {
             return CommandResult.failure("No phases to skip to.");
         }
-        String phaseName = phase.getName();
+        String name = phase.getName();
         return switch (skipped) {
             case 0 -> CommandResult.failure("No phases to skip to.");
-            case 1 -> CommandResult.success("Skipped to the next phase: &l" + phaseName);
-            default -> CommandResult.success("Skipped to the phase: &l" + phaseName + " &2(" + skipped + " phases skipped)");
+            case 1 -> CommandResult.success("Skipped to the next phase: &l" + name);
+            default -> CommandResult.success("Skipped to phase: &l" + name + " &2(" + skipped + " phases skipped)");
         };
     }
 }

@@ -25,7 +25,6 @@ import me.clickism.clickeventlib.serialization.AutoSaver;
 import me.clickism.clickeventlib.statistic.StatisticManager;
 import me.clickism.clickeventlib.statistic.Statistics;
 import me.clickism.clickeventlib.statistic.UUIDManager;
-import me.clickism.clickeventlib.team.EventTeam;
 import me.clickism.clickeventlib.team.Role;
 import me.clickism.clickeventlib.team.RoleManager;
 import me.clickism.clickeventlib.team.TeamManager;
